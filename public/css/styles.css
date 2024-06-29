@@ -1,0 +1,41 @@
+/* Color de footer*/
+.main-footer.navbar-green {
+    background-color: #671222 !important;/* Color footer */
+}
+
+/* Botón de cerrar sesión */
+.custom-btn-color {
+    color: #034C48; /* Color del texto */
+    border-color: #034C48; /* Color del borde */
+}
+
+/* Botón de cerrar sesión */
+.custom-btn-color:hover {
+    background-color: #034C48; /* Color de fondo al pasar el ratón */
+    color: #ffff; /* Color del texto al pasar el ratón */
+}
+
+/* imagen de fondo de inicio de sesión */
+.hold-transition{
+    background-image: url('/images/login.jpg');
+    background-size: 100%; /* Ajusta el tamaño de la imagen según tus necesidades */
+    background-position: cover;
+    background-repeat: no-repeat;
+}
+
+/* logo de inicio de sesión*/
+.login-logo img {
+    max-width: 100%; /* Ajusta el ancho máximo de la imagen */
+    max-height: 100%; /* Ajusta la altura máxima de la imagen */
+}
+
+/* logo de barra menú */
+.navbar-collapse img {
+    max-width: 50px; /* Cambia este valor según el tamaño deseado */
+    max-height: 50px; /* Cambia este valor según el tamaño deseado */
+}
+
+/* boton de cerrar sesión al lado derecho */
+.order-6 ml-auto {
+    margin-left: auto;
+}

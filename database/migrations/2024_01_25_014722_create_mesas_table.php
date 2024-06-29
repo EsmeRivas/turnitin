@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration {
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('mesas', function (Blueprint $table) {
+            $table->id();
+            #$table->foreignId('ctg_mesa_id')->constrained('ctg_mesas');
+            #$table->foreignId('ctg_area_id')->constrained('ctg_areas');
+            #$table->foreignId('ctg_ponencia_id')->constrained('ctg_ponencias');
+            #$table->foreignId('user_id')->constrained('users');
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('mesas');
+    }
+};
