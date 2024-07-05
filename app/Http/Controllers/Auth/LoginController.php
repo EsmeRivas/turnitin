@@ -5,7 +5,8 @@ use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
+use Symfony\Component\HttpFoundation\Response;
 
 class LoginController extends Controller
 {
@@ -24,7 +25,16 @@ class LoginController extends Controller
     {
         $credentials = $request->only('username', 'password');
 
-        if (Auth::attempt($credentials)) {
+        $user = $credentials['username'];
+        $password = $credentials['password'];
+        $query = "select case when count(*) > 0 then true else false end as credencialesCorrectas
+                from users usr 
+                where usr.username = ? 
+                and usr.password = ?";
+
+        $result = DB::select($query, [$user, $password]);
+        
+        if ($result[0]->credencialescorrectas) {
             
             return redirect()->intended('/');
         }

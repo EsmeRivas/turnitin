@@ -10,6 +10,7 @@ use App\Models\CtgArea;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -36,11 +37,13 @@ class RegisterController extends Controller
         $persona->apellido2 = $request->apellido2;
         $persona->es_fisica = $request->es_fisica;
         $persona->save();
+        
+        return 'entra';
 
         // Crear una nueva instancia de usuario con los datos proporcionados
         $user = new User();
         $user->username = $request->username;
-        $user->password = Hash::make($request->password);
+        $user->password = $request->password;
         $user->rol_id = $request->rol_id;
         $user->ctg_area_id = $request->ctg_area_id;
         $user->persona_id = $persona->id; // Asignar el id de la persona creada al usuario
