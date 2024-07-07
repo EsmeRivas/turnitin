@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('ctg_mesas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nombre_mesa',30);
             $table->boolean('activo')->default(true);
             $table->timestamps();

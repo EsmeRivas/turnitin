@@ -7,10 +7,12 @@ use App\Models\Persona;
 use App\Models\User;
 use App\Models\Rol;
 use App\Models\CtgArea;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Validator;
 
 class RegisterController extends Controller
@@ -20,8 +22,8 @@ class RegisterController extends Controller
     {
         // Validar los datos del formulario con reglas de validación
         $request->validate([
-            'username' => ['required', 'string', 'max:255', 'unique:users'],
-            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'username' => ['required', 'string', 'max:255'],
+            'password' => ['required', 'string'],
             'rol_id' => ['required', 'integer'],
             'ctg_area_id' => ['required', 'integer'],
             'nombre' => ['required', 'string', 'max:255'], // Validación para el nombre de la persona
@@ -37,8 +39,6 @@ class RegisterController extends Controller
         $persona->apellido2 = $request->apellido2;
         $persona->es_fisica = $request->es_fisica;
         $persona->save();
-        
-        return 'entra';
 
         // Crear una nueva instancia de usuario con los datos proporcionados
         $user = new User();
@@ -50,7 +50,7 @@ class RegisterController extends Controller
         $user->save();
 
         // Redirigir al usuario a alguna página después del registro
-        return redirect('/')->with('success', '¡Registro exitoso!');
+        return redirect('/login')->with('success', '¡Registro exitoso!');
     }
 
     // Método para mostrar el formulario de registro

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('ctg_vias', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->boolean('es_auto')->default(false);
             $table->boolean('activo')->default(true);
             #$table->foreignId('ctg_tipo_recurso_id')->constrained('ctg_tipo_recursos');

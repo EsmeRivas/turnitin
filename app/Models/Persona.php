@@ -13,6 +13,8 @@ class Persona extends Model
 
     protected $guarded = [];
 
+    public $incrementing = true;
+
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);

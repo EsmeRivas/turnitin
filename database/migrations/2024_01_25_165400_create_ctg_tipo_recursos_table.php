@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('ctg_tipo_recursos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nombre_tipo_recurso_apelado', 100);
             $table->boolean('activo')->default(true);
             $table->timestamps();

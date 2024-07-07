@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('quejosos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             #$table->foreignId('parte_id')->constrained('partes');
             #$table->foreignId('amparo')->constrained('amparos');
             $table->timestamps();

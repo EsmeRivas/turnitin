@@ -8,68 +8,42 @@ class InfoSeeder extends Seeder
     {   
 
         //NO SE ASIGNARÁ AREA PORQUE LA TABLA USUARIOS LO ASIGNA
-        $ponencias = [
-            ['id' => 1, 'nombre_ponencia' => 'PONENCIA UNO PRIMERA SALA', 'activo' => true, 'ctg_ponente_id' => 1,],
-            ['id' => 2, 'nombre_ponencia' => 'PONENCIA DOS SEGUNDA SALA', 'activo' => true, 'ctg_ponente_id' => 2,],
-            ['id' => 3, 'nombre_ponencia' => 'PONENCIA TRES TERCERA SALA', 'activo' => true, 'ctg_ponente_id' => 3,],
-        ];
-
-        $mesas = [
-            ['nombre_mesa' => 'MESA UNO'],
-            ['nombre_mesa' => 'MESA DOS'],
-            ['nombre_mesa' => 'MESA TRES'],
-            ['nombre_mesa' => 'MESA CUATRO'],
-            ['nombre_mesa' => 'MESA CINCO'],
-            ['nombre_mesa' => 'MESA SEIS'],
-            ['nombre_mesa' => 'MESA SIETE'],
-            ['nombre_mesa' => 'MESA OCHO'],
-            ['nombre_mesa' => 'MESA NUEVE'],
-        ];
-
-        $delitos = [
-            ['nombre_delito' => 'Delitos contra la persona'],
-            ['nombre_delito' => 'Delitos de violencia de género'],
-            ['nombre_delito' => 'Delitos económicos'],
-            ['nombre_delito' => 'Delitos contra el patrimonio'],
-            ['nombre_delito' => 'Delitos contra la salud pública'],
-            ['nombre_delito' => 'Delitos de tráfico'],
-            ['nombre_delito' => 'Delitos administrativos y políticos'],
-            ['nombre_delito' => 'Delitos contra el medio ambiente y urbanísticos'],
-            ['nombre_delito' => 'Delitos contra la libertan sexual'],
-            ['nombre_delito' => 'Delitos contra la intimidad'],
+        $personas = [
+            ['nombre' => 'ALEXIS', 'apellido1' => 'VAZQUEZ', 'apellido2' => 'MORALES', 'es_fisica' => true],
+            ['nombre' => 'ESMERALDA', 'apellido1' => 'RIVAS', 'apellido2' => 'LUNA', 'es_fisica' => true]
         ];
 
         $distritos = [
-            ['id' => 1, 'nombre_distrito' => 'ACAYUCAN'],
-            ['id' => 2, 'nombre_distrito' => 'COATEPEC'],
-            ['id' => 3, 'nombre_distrito' => 'COATZACOALCOS'],
-            ['id' => 4, 'nombre_distrito' => 'CORDOBA'],
-            ['id' => 5, 'nombre_distrito' => 'COSAMALOAPAN'],
-            ['id' => 6, 'nombre_distrito' => 'CHICONTEPEC'],
-            ['id' => 7, 'nombre_distrito' => 'HUATUSCO'],
-            ['id' => 8, 'nombre_distrito' => 'HUAYACOCOTLA'],
-            ['id' => 9, 'nombre_distrito' => 'JALACINGO'],
-            ['id' => 10, 'nombre_distrito' => 'MARTINEZ DE LA TORRE'],
-            ['id' => 11, 'nombre_distrito' => 'MEDELLIN'],
-            ['id' => 12, 'nombre_distrito' => 'MINATITLAN'],
-            ['id' => 13, 'nombre_distrito' => 'MISANTLA'],
-            ['id' => 14, 'nombre_distrito' => 'ORIZABA'],
-            ['id' => 15, 'nombre_distrito' => 'OZULUAMA'],
-            ['id' => 16, 'nombre_distrito' => 'PANUCO'],
-            ['id' => 17, 'nombre_distrito' => 'PAPANTLA'],
-            ['id' => 18, 'nombre_distrito' => 'POZA RICA'],
-            ['id' => 19, 'nombre_distrito' => 'SAN ANDRES TUXTLA'],
-            ['id' => 20, 'nombre_distrito' => 'TANTOYUCA'],
-            ['id' => 21, 'nombre_distrito' => 'TIERRA BLANCA'],
-            ['id' => 22, 'nombre_distrito' => 'TUXPAN'],
-            ['id' => 23, 'nombre_distrito' => 'VERACRUZ'],
-            ['id' => 24, 'nombre_distrito' => 'XALAPA'],
-            ['id' => 25, 'nombre_distrito' => 'PALMA SOLA'],
-            ['id' => 26, 'nombre_distrito' => 'ZONGOLICA'],
+            ['nombre_distrito' => 'ACAYUCAN'],
+            ['nombre_distrito' => 'COATEPEC'],
+            ['nombre_distrito' => 'COATZACOALCOS'],
+            ['nombre_distrito' => 'CORDOBA'],
+            ['nombre_distrito' => 'COSAMALOAPAN'],
+            ['nombre_distrito' => 'CHICONTEPEC'],
+            ['nombre_distrito' => 'HUATUSCO'],
+            ['nombre_distrito' => 'HUAYACOCOTLA'],
+            ['nombre_distrito' => 'JALACINGO'],
+            ['nombre_distrito' => 'MARTINEZ DE LA TORRE'],
+            ['nombre_distrito' => 'MEDELLIN'],
+            ['nombre_distrito' => 'MINATITLAN'],
+            ['nombre_distrito' => 'MISANTLA'],
+            ['nombre_distrito' => 'ORIZABA'],
+            ['nombre_distrito' => 'OZULUAMA'],
+            ['nombre_distrito' => 'PANUCO'],
+            ['nombre_distrito' => 'PAPANTLA'],
+            ['nombre_distrito' => 'POZA RICA'],
+            ['nombre_distrito' => 'SAN ANDRES TUXTLA'],
+            ['nombre_distrito' => 'TANTOYUCA'],
+            ['nombre_distrito' => 'TIERRA BLANCA'],
+            ['nombre_distrito' => 'TUXPAN'],
+            ['nombre_distrito' => 'VERACRUZ'],
+            ['nombre_distrito' => 'XALAPA'],
+            ['nombre_distrito' => 'PALMA SOLA'],
+            ['nombre_distrito' => 'ZONGOLICA'],
         ];
 
         $roles = [
-            ['id' => 1, 'nombre_rol' => 'ADMINISTRADOR'],
+            ['nombre_rol' => 'ADMINISTRADOR']
         ];
 
         $areas = [
@@ -122,6 +96,48 @@ class InfoSeeder extends Seeder
                 'distrito_id' => 24,
             ],
         ];
+
+        $ponentes = [
+            [
+                'activo' => true,
+                'persona_id' => 1
+            ]
+        ];
+
+        $ponencias = [
+            ['nombre_ponencia' => 'PONENCIA UNO PRIMERA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 1],
+            ['nombre_ponencia' => 'PONENCIA DOS SEGUNDA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 2],
+            ['nombre_ponencia' => 'PONENCIA TRES TERCERA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 3],
+        ];
+
+        $users = [
+            ['username' => 'Admin', 'password' => '123admin', 'persona_id' => 1, 'rol_id' => 1, 'ctg_area_id' => 1]
+        ];
+
+        $mesas = [
+            ['nombre_mesa' => 'MESA UNO'],
+            ['nombre_mesa' => 'MESA DOS'],
+            ['nombre_mesa' => 'MESA TRES'],
+            ['nombre_mesa' => 'MESA CUATRO'],
+            ['nombre_mesa' => 'MESA CINCO'],
+            ['nombre_mesa' => 'MESA SEIS'],
+            ['nombre_mesa' => 'MESA SIETE'],
+            ['nombre_mesa' => 'MESA OCHO'],
+            ['nombre_mesa' => 'MESA NUEVE'],
+        ];
+
+        $delitos = [
+            ['nombre_delito' => 'Delitos contra la persona'],
+            ['nombre_delito' => 'Delitos de violencia de género'],
+            ['nombre_delito' => 'Delitos económicos'],
+            ['nombre_delito' => 'Delitos contra el patrimonio'],
+            ['nombre_delito' => 'Delitos contra la salud pública'],
+            ['nombre_delito' => 'Delitos de tráfico'],
+            ['nombre_delito' => 'Delitos administrativos y políticos'],
+            ['nombre_delito' => 'Delitos contra el medio ambiente y urbanísticos'],
+            ['nombre_delito' => 'Delitos contra la libertan sexual'],
+            ['nombre_delito' => 'Delitos contra la intimidad'],
+        ];
         
         $apelos = [
             ['id' => 1, 'nombre_tipo_apelo' => 'MINISTERIO PUBLICO', 'activo' => true],
@@ -138,51 +154,24 @@ class InfoSeeder extends Seeder
             ['id' => 2, 'nombre_tipo_parte' => 'VICTIMA', 'activo' => true],
         ];
 
-        //FALTA EJECUTAR PONENCIAS Y PONENTE
-        foreach ($ponentes as $ponente) {
-            DB::table('ctg_ponentes')->insert([
-                'id' => $ponente['id'],
-                'activo' => $ponente['activo'],
-                'persona_id' => $ponente['persona_id'],
-            ]);
-        }
-
-        foreach ($ponencias as $ponencia) {
-            DB::table('ctg_ponencias')->insert([
-                'id' => $ponencia['id'],
-                'nombre_ponencia' => $ponencia['nombre_ponencia'],
-                'activo' => $ponencia['activo'],
-                'ctg_ponente_id' => $ponencia['ctg_ponente_id'],
-                //NO SE ASIGNARÁ AREA PORQUE LA TABLA USUARIOS LO ASIGNA
-                //'ctg_area_id' => $ponencia['ctg_area_id'],
-            ]);
-        }
-
-        foreach ($mesas as $mesa) {
-            DB::table('ctg_mesas')->insert([
-                'nombre_mesa' => $mesa['nombre_mesa'],
-                'activo' => true,
-            ]);
-        }
-        
-        foreach ($delitos as $delito) {
-            DB::table('ctg_delitos')->insert([
-                'nombre_delito' => $delito['nombre_delito'],
-                'activo' => true,
+        foreach ($personas as $persona) {
+            DB::table('personas')->insert([
+                'nombre' => $persona['nombre'],
+                'apellido1' => $persona['apellido1'],
+                'apellido2' => $persona['apellido2'],
+                'es_fisica' => $persona['es_fisica']
             ]);
         }
 
         foreach ($distritos as $distritos) {
             DB::table('distritos')->insert([
-                'id' => $distritos['id'],
                 'nombre_distrito' => $distritos['nombre_distrito'],
             ]);
         }
 
         foreach ($roles as $rol) {
             DB::table('roles')->insert([
-                'id' => $rol['id'],
-                'nombre_rol' => $rol['nombre_rol'],
+                'nombre_rol' => $rol['nombre_rol']
             ]);
         }
 
@@ -194,22 +183,82 @@ class InfoSeeder extends Seeder
                 'distrito_id' => $area['distrito_id'],
             ]);
         }
-        
-        foreach ($apelos as $apelo) {
-            DB::table('ctg_apelos')->insert([
-                'id' => $apelo['id'],
-                'nombre_tipo_apelo' => $apelo['nombre_tipo_apelo'],
-                'activo' => $apelo ['activo'],
+
+        foreach ($ponentes as $ponente) {
+            DB::table('ctg_ponentes')->insert([
+                'activo' => $ponente['activo'],
+                'persona_id' => $ponente['persona_id'],
             ]);
         }
 
-        foreach ($ctg_partes as $partes) {
-            DB::table('ctg_tipo_partes')->insert([
-                'id' => $partes['id'],
-                'nombre_tipo_parte' => $partes['nombre_tipo_parte'],
-                'activo' => $partes ['activo'],
-            ]);
-        } 
+        foreach ($ponencias as $ponencia) {
+            DB::table('ctg_ponencias')->insert([
+                'nombre_ponencia' => $ponencia['nombre_ponencia'],
+                'activo' => $ponencia['activo'],
+                'ctg_ponente_id' => $ponencia['ctg_ponente_id'],
+                'ctg_area_id' => $ponencia['ctg_area_id'],
+            ]); 
+        }
+
+        foreach ($users as $user) {
+            DB::table('users')->insert([
+                'username' => $user['username'],
+                'password' => $user['password'],
+                'persona_id' => $user['persona_id'],
+                'rol_id' => $user['rol_id'],
+                'ctg_area_id' => $user['ctg_area_id'],
+            ]); 
+        }
+
+        //FALTA EJECUTAR PONENCIAS Y PONENTE
+        // foreach ($ponentes as $ponente) {
+        //     DB::table('ctg_ponentes')->insert([
+        //         'id' => $ponente['id'],
+        //         'activo' => $ponente['activo'],
+        //         'persona_id' => $ponente['persona_id'],
+        //     ]);
+        // }
+
+        // foreach ($ponencias as $ponencia) {
+        //     DB::table('ctg_ponencias')->insert([
+        //         'id' => $ponencia['id'],
+        //         'nombre_ponencia' => $ponencia['nombre_ponencia'],
+        //         'activo' => $ponencia['activo'],
+        //         'ctg_ponente_id' => $ponencia['ctg_ponente_id'],
+        //         //NO SE ASIGNARÁ AREA PORQUE LA TABLA USUARIOS LO ASIGNA
+        //         //'ctg_area_id' => $ponencia['ctg_area_id'],
+        //     ]);
+        // }
+
+        // foreach ($mesas as $mesa) {
+        //     DB::table('ctg_mesas')->insert([
+        //         'nombre_mesa' => $mesa['nombre_mesa'],
+        //         'activo' => true,
+        //     ]);
+        // }
+        
+        // foreach ($delitos as $delito) {
+        //     DB::table('ctg_delitos')->insert([
+        //         'nombre_delito' => $delito['nombre_delito'],
+        //         'activo' => true,
+        //     ]);
+        // }
+        
+        // foreach ($apelos as $apelo) {
+        //     DB::table('ctg_apelos')->insert([
+        //         'id' => $apelo['id'],
+        //         'nombre_tipo_apelo' => $apelo['nombre_tipo_apelo'],
+        //         'activo' => $apelo ['activo'],
+        //     ]);
+        // }
+
+        // foreach ($ctg_partes as $partes) {
+        //     DB::table('ctg_tipo_partes')->insert([
+        //         'id' => $partes['id'],
+        //         'nombre_tipo_parte' => $partes['nombre_tipo_parte'],
+        //         'activo' => $partes ['activo'],
+        //     ]);
+        // } 
 
     }
 }

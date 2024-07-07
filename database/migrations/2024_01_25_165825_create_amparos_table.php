@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('amparos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('numero_amparo', 20)->unique();
             $table->date('fecha_inicio_amparo');
             $table->date('fecha_resolucion_amparo')->nullable();

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('ctg_jueces', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             #$table->foreignId('persona_id')->constrained('personas');
             $table->boolean('activo')->default(true);
             $table->timestamps();

@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('mesas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             #$table->foreignId('ctg_mesa_id')->constrained('ctg_mesas');
             #$table->foreignId('ctg_area_id')->constrained('ctg_areas');
             #$table->foreignId('ctg_ponencia_id')->constrained('ctg_ponencias');

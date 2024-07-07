@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('ctg_delitos', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('nombre_delito', 50);
             $table->boolean('activo')->default(true);
             $table->timestamps();

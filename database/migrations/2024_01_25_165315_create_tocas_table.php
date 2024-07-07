@@ -11,7 +11,7 @@ return new class extends Migration {
     public function up(): void
     {
         Schema::create('tocas', function (Blueprint $table) {
-            $table->id();
+            $table->increments('id');
             $table->string('numero_toca', 10)->unique();
             $table->string('numero_expediente', 20);
             #$table->foreignId('ctg_via_id')->constrained('ctg_vias');
