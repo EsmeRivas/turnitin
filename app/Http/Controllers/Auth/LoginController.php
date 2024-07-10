@@ -1,10 +1,13 @@
 <?php
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
+use App\Models\Toca;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -35,8 +38,20 @@ class LoginController extends Controller
         $result = DB::select($query, [$user, $password]);
         
         if ($result[0]->credencialescorrectas) {
+            $query = 
+            "select *
+            from users usr 
+            where usr.username = ? 
+            and usr.password = ?
+			and usr.activo = true;";
+
+            [$userdata] = DB::select($query, [$user, $password]);
+            $tocas = Toca::all();
+
+            $response = redirect('/');
+            $response->cookie(Cookie::make('username', 'Admin'));
             
-            return redirect()->intended('/');
+            return $response;
         }
 
         // Authentication failed
@@ -51,10 +66,9 @@ class LoginController extends Controller
     // Método para cerrar sesión
     public function logout(Request $request)
     {
-        Auth::logout(); 
-        $request->session()->invalidate(); // Invalida la sesión actual
-        $request->session()->regenerateToken(); // Regenera el token de sesión
-        return redirect('/login'); // Redirige a la página principal después del logout
+        $response = redirect('/login');
+        $response->withCookie(Cookie::forget('username'));
+        return $response; // Redirige a la página principal después del logout
     }
     
 }

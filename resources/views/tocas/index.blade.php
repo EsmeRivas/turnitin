@@ -106,3 +106,7 @@
     </div>
 </div>
 @endsection('content')
+@section('scripts')
+<script>
+</script>
+@endsection('scripts')

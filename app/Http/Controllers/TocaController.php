@@ -13,12 +13,21 @@ use App\Models\Persona;
 use App\Models\CtgApelo;
 use App\Models\CtgVia;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class TocaController extends Controller
 {
     public function index()
     {
         $tocas = Toca::all();
+
+        $usernameCookie = FacadesRequest::cookie('username');
+
+        if ($usernameCookie === '' || $usernameCookie === null)
+        {
+            return redirect('/login');
+        }
+
         return view('tocas.index', compact('tocas'));
     }
 

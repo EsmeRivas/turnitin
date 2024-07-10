@@ -20,6 +20,7 @@ return new class extends Migration {
             #$table->foreignId('ctg_area_id')->constrained('ctg_areas');
             $table->timestamp('created_at')->default(Date::now()->toDateTimeString());
             $table->timestamp('updated_at')->default(Date::now()->toDateTimeString());
+            $table->boolean('activo')->default(true);
         });
     }
 

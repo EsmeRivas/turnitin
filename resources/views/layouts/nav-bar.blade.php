@@ -57,14 +57,12 @@
             </ul>
         </div>
         <!-- Botón cerrar sesión -->
-        @if(Auth::check())
-                <div class="order-6 ml-auto">
-                <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-success custom-btn-color">CERRAR SESIÓN</a>
-                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-                </form>
-                </div>
-        @endif
+        <div class="order-6 ml-auto">
+            <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="btn btn-outline-success custom-btn-color">CERRAR SESIÓN</a>
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+            </form>
+        </div>
      
     </div>
 </nav>
