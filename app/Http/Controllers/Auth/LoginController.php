@@ -46,10 +46,10 @@ class LoginController extends Controller
 			and usr.activo = true;";
 
             [$userdata] = DB::select($query, [$user, $password]);
-            $tocas = Toca::all();
 
             $response = redirect('/');
-            $response->cookie(Cookie::make('username', 'Admin'));
+            $response->cookie(Cookie::make('username', $userdata->username));
+            $response->cookie(Cookie::make('id_user', $userdata->id));
             
             return $response;
         }

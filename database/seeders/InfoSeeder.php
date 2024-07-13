@@ -167,6 +167,1306 @@ class InfoSeeder extends Seeder
             ['nombre_tipo_parte' => 'VICTIMA']
         ];
 
+        $mesas_relacion = [
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 1,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 2,
+                'user_id' => 1
+            ],
+
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 1,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 2,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 3,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 4,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 5,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 6,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 7,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 1,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 2,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 3,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 4,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 5,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 6,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 7,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 8,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+            [
+                'ctg_mesa_id' => 9,
+                'ctg_area_id' => 8,
+                'ctg_ponencia_id' => 3,
+                'user_id' => 1
+            ],
+        ];
+
         foreach ($personas as $persona) {
             DB::table('personas')->insert([
                 'nombre' => $persona['nombre'],
@@ -265,6 +1565,15 @@ class InfoSeeder extends Seeder
                 'activo' => true,
             ]);
         } 
+
+        foreach ($mesas_relacion as $mesa) {
+            DB::table('mesas')->insert([
+                'ctg_mesa_id' => $mesa['ctg_mesa_id'],
+                'ctg_area_id' => $mesa['ctg_area_id'],
+                'ctg_ponencia_id' => $mesa['ctg_ponencia_id'],
+                'user_id' => $mesa['user_id']
+            ]);
+        }
         
         //FALTA EJECUTAR PONENCIAS Y PONENTE
         // foreach ($ponentes as $ponente) {

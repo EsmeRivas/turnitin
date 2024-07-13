@@ -8,7 +8,7 @@
                 <h3 class="card-title">TOCAS</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+                        <input type="search" name="table_search" class="form-control float-right" placeholder="Search">
                         <div class="input-group-append">
                             <button type="submit" class="btn btn-default">
                                 <i class="fas fa-search"></i>
@@ -46,6 +46,10 @@
 
                         <th>Mesa Asignada</th>                       
                         
+                        
+
+
+
 
 
                     </tr>
@@ -55,48 +59,17 @@
                     @foreach($tocas as $toca)
                         <tr>
                             <td>{{$toca->numero_toca}}</td>
-
                             <td>{{$toca->numero_expediente}}</td>
-
-                            <!--Captura de partes-->
-                                @foreach($toca->partes as $parte)
-                            <td> 
-                                {{ $parte->persona->nombre }} {{$parte->persona->apellido1}} {{$parte->persona->apellido2}}
-                            </td>
-                                @endforeach
-                            <!--Aquí termina-->
-                            
-                            <td>
-                                @foreach($toca->delitos as $delito)
-                                    {{$delito->ctg_delito->nombre_delito}}
-                                @endforeach
-                            </td>
-                             
-                            <!--pendiente que muestre el distrito CORRECTO-->
-                            <!-- En el archivo index.blade.php -->
-                            <td>{{ $toca->ctg_area->distrito->nombre_distrito ?? '' }}</td>
-
-                            <td>@if($toca->ctg_via && $toca->ctg_via->es_auto == 1)
-                                AUTO
-                            @else
-                                SENTENCIA
-                            @endif
-                            </td>
-
+                            <td>{{$toca->imputado}}</td>
+                            <td>{{$toca->victima}}</td>
+                            <td>{{$toca->delito}}</td>
+                            <td>{{$toca->nombre_distrito}}</td>
+                            <td>{{$toca->via}}</td>
                             <td>{{$toca->numero_toca}}</td>
-
-                            <td>{{ $toca->ctg_apelo->nombre_tipo_apelo ?? '' }}</td>
-
-
-                            <td>{{ $toca->ctg_ponencia->nombre_ponencia ?? '' }}</td>
-                            <!--no muestra el nombre del ponente-->
-                            <td>{{ $toca->ctg_ponencia->nombre_ponencia ?? '' }}</td>
-
-                            <td>{{ $toca->mesa->nombre_mesa ?? '' }}</td>
-
-
-                            
-
+                            <td>{{$toca->tipoapelo}}</td>
+                            <td>{{$toca->ponencia}}</td>
+                            <td>{{$toca->ponente}}</td>
+                            <td>{{$toca->mesaasignada}}</td>
                         </tr>
                     @endforeach
                     </tbody>
