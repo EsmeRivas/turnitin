@@ -54,7 +54,7 @@ class TocaController extends Controller
             'ctg_apelo_id' => $request->apelos,   
 
             
-            'ctg_area_id' => $request->distrito,
+            'ctg_area_id' => $request->areas,
               
         ]);
 

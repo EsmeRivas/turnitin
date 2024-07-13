@@ -39,7 +39,7 @@ class InfoSeeder extends Seeder
             ['nombre_distrito' => 'VERACRUZ'],
             ['nombre_distrito' => 'XALAPA'],
             ['nombre_distrito' => 'PALMA SOLA'],
-            ['nombre_distrito' => 'ZONGOLICA'],
+            ['nombre_distrito' => 'ZONGOLICA']
         ];
 
         $roles = [
@@ -94,7 +94,7 @@ class InfoSeeder extends Seeder
                 'es_primera_instancia' => false,
                 'activo' => true,
                 'distrito_id' => 24,
-            ],
+            ]
         ];
 
         $ponentes = [
@@ -107,7 +107,7 @@ class InfoSeeder extends Seeder
         $ponencias = [
             ['nombre_ponencia' => 'PONENCIA UNO PRIMERA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 1],
             ['nombre_ponencia' => 'PONENCIA DOS SEGUNDA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 2],
-            ['nombre_ponencia' => 'PONENCIA TRES TERCERA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 3],
+            ['nombre_ponencia' => 'PONENCIA TRES TERCERA SALA', 'activo' => true, 'ctg_ponente_id' => 1, 'ctg_area_id' => 3]
         ];
 
         $users = [
@@ -123,7 +123,7 @@ class InfoSeeder extends Seeder
             ['nombre_mesa' => 'MESA SEIS'],
             ['nombre_mesa' => 'MESA SIETE'],
             ['nombre_mesa' => 'MESA OCHO'],
-            ['nombre_mesa' => 'MESA NUEVE'],
+            ['nombre_mesa' => 'MESA NUEVE']
         ];
 
         $delitos = [
@@ -136,22 +136,35 @@ class InfoSeeder extends Seeder
             ['nombre_delito' => 'Delitos administrativos y políticos'],
             ['nombre_delito' => 'Delitos contra el medio ambiente y urbanísticos'],
             ['nombre_delito' => 'Delitos contra la libertan sexual'],
-            ['nombre_delito' => 'Delitos contra la intimidad'],
+            ['nombre_delito' => 'Delitos contra la intimidad']
         ];
         
         $apelos = [
-            ['id' => 1, 'nombre_tipo_apelo' => 'MINISTERIO PUBLICO', 'activo' => true],
-            ['id' => 2, 'nombre_tipo_apelo' => 'IMPUTADO', 'activo' => true],
-            ['id' => 3, 'nombre_tipo_apelo' => 'SENTENCIADO', 'activo' => true],
-            ['id' => 4, 'nombre_tipo_apelo' => 'ACTOR', 'activo' => true],
-            ['id' => 5, 'nombre_tipo_apelo' => 'DEMANDADO', 'activo' => true],
-            ['id' => 6, 'nombre_tipo_apelo' => 'REPRESENTANTE', 'activo' => true],
-            ['id' => 7, 'nombre_tipo_apelo' => 'VICTIMA', 'activo' => true],
+            ['nombre_tipo_apelo' => 'MINISTERIO PUBLICO', 'activo' => true],
+            ['nombre_tipo_apelo' => 'IMPUTADO', 'activo' => true],
+            ['nombre_tipo_apelo' => 'SENTENCIADO', 'activo' => true],
+            ['nombre_tipo_apelo' => 'ACTOR', 'activo' => true],
+            ['nombre_tipo_apelo' => 'DEMANDADO', 'activo' => true],
+            ['nombre_tipo_apelo' => 'REPRESENTANTE', 'activo' => true],
+            ['nombre_tipo_apelo' => 'VICTIMA', 'activo' => true]
+        ];
+
+        $recursos = [
+            ['nombre_tipo_recurso_apelado' => 'Recurso de apelación'],
+            ['nombre_tipo_recurso_apelado' => 'Recurso de casación'],
+            ['nombre_tipo_recurso_apelado' => 'Recurso de queja'],
+            ['nombre_tipo_recurso_apelado' => 'Recurso de reforma'],
+            ['nombre_tipo_recurso_apelado' => 'Recurso de revisión']
+        ];
+
+        $vias = [
+            ['ctg_tipo_recurso_id' => 1],
+            ['ctg_tipo_recurso_id' => 3]
         ];
 
         $ctg_partes = [
-            ['id' => 1, 'nombre_tipo_parte' => 'ACUSADO', 'activo' => true],
-            ['id' => 2, 'nombre_tipo_parte' => 'VICTIMA', 'activo' => true],
+            ['nombre_tipo_parte' => 'ACUSADO'],
+            ['nombre_tipo_parte' => 'VICTIMA']
         ];
 
         foreach ($personas as $persona) {
@@ -165,7 +178,7 @@ class InfoSeeder extends Seeder
 
         foreach ($distritos as $distritos) {
             DB::table('distritos')->insert([
-                'nombre_distrito' => $distritos['nombre_distrito'],
+                'nombre_distrito' => $distritos['nombre_distrito']
             ]);
         }
 
@@ -210,6 +223,49 @@ class InfoSeeder extends Seeder
             ]); 
         }
 
+        foreach ($mesas as $mesa) {
+            DB::table('ctg_mesas')->insert([
+                'nombre_mesa' => $mesa['nombre_mesa'],
+                'activo' => true,
+            ]);
+        }
+
+        foreach ($delitos as $delito) {
+            DB::table('ctg_delitos')->insert([
+                'nombre_delito' => $delito['nombre_delito'],
+                'activo' => true,
+            ]);
+        }
+        
+        foreach ($apelos as $apelo) {
+            DB::table('ctg_apelos')->insert([
+                'nombre_tipo_apelo' => $apelo['nombre_tipo_apelo'],
+                'activo' => $apelo['activo'],
+            ]);
+        }
+
+        foreach ($recursos as $recurso) {
+            DB::table('ctg_tipo_recursos')->insert([
+                'nombre_tipo_recurso_apelado' => $recurso['nombre_tipo_recurso_apelado'],
+                'activo' => true,
+            ]);
+        }
+
+        foreach ($vias as $via) {
+            DB::table('ctg_vias')->insert([
+                'es_auto' => false,
+                'activo' => true,
+                'ctg_tipo_recurso_id' => $via['ctg_tipo_recurso_id'],
+            ]);
+        }
+
+        foreach ($ctg_partes as $partes) {
+            DB::table('ctg_tipo_partes')->insert([
+                'nombre_tipo_parte' => $partes['nombre_tipo_parte'],
+                'activo' => true,
+            ]);
+        } 
+        
         //FALTA EJECUTAR PONENCIAS Y PONENTE
         // foreach ($ponentes as $ponente) {
         //     DB::table('ctg_ponentes')->insert([
@@ -227,20 +283,6 @@ class InfoSeeder extends Seeder
         //         'ctg_ponente_id' => $ponencia['ctg_ponente_id'],
         //         //NO SE ASIGNARÁ AREA PORQUE LA TABLA USUARIOS LO ASIGNA
         //         //'ctg_area_id' => $ponencia['ctg_area_id'],
-        //     ]);
-        // }
-
-        // foreach ($mesas as $mesa) {
-        //     DB::table('ctg_mesas')->insert([
-        //         'nombre_mesa' => $mesa['nombre_mesa'],
-        //         'activo' => true,
-        //     ]);
-        // }
-        
-        // foreach ($delitos as $delito) {
-        //     DB::table('ctg_delitos')->insert([
-        //         'nombre_delito' => $delito['nombre_delito'],
-        //         'activo' => true,
         //     ]);
         // }
         
