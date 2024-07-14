@@ -7,15 +7,15 @@ use Illuminate\Auth\Middleware\Authenticate as Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
-class Authenticate extends Middleware
+class ensureauthenticate extends Middleware
 {
-    public function authSession(Request $request, Closure $next)
+    public function handle($request, Closure $next, ...$guards)
     {
         $usernameCookie = FacadesRequest::cookie('username');
 
-        if ($usernameCookie === '' || $usernameCookie === null)
+        if ($usernameCookie !== '' && $usernameCookie !== null)
         {
-            return redirect('/login');
+            return redirect('/');
         }
 
         return $next($request);
