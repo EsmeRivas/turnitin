@@ -116,6 +116,23 @@
                                                 <input id="apellido2_acusado" type="text" class="form-control"
                                                        name="apellido2_acusado" onblur="convertirMayusculas(this)">
                                             </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button id="btn-agregar-acusado" type="button" class="btn btn-success">AGREGAR</button>
+                                            </div>
+                                            <div class="table-responsive p-0 mt-2">
+                                                <table class="table table-hover text-nowrap" id="itemsTableAcusado">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Nombre acusado</th>
+                                                            <th>Primer apellido</th>
+                                                            <th>Segundo apellido</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="body-table-acusados">
+                                                    </tbody>
+                                                </table>
+                                            </div>
                                         </div>
                                         <div class="col-sm-6">
                                             <h4>VICTIMA</h4>
@@ -133,6 +150,23 @@
                                                 <label for="apellido2_victima">Segundo apellido</label>
                                                 <input id="apellido2_victima" type="text" class="form-control"
                                                        name="apellido2_victima" onblur="convertirMayusculas(this)">
+                                            </div>
+                                            <div class="d-flex justify-content-end">
+                                                <button id="btn-agregar-victimas" type="button" class="btn btn-success">AGREGAR</button>
+                                            </div>
+                                            <div class="table-responsive p-0 mt-2">
+                                                <table class="table table-hover text-nowrap" id="itemsTableVictimas">
+                                                    <thead>
+                                                        <tr>
+                                                            <th></th>
+                                                            <th>Nombre victima</th>
+                                                            <th>Primer apellido</th>
+                                                            <th>Segundo apellido</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody id="body-table-victimas">
+                                                    </tbody>
+                                                </table>
                                             </div>
                                         </div>  
                                     </div>
@@ -214,6 +248,139 @@
 @section('scripts')
     <script src="{{asset('plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
+
+    <script>
+        let acusados = []
+        let contadorAcusados = 0
+
+        function renderTableAcusados(acusados) {
+            const tableBody = document.getElementById('body-table-acusados');
+            tableBody.innerHTML = ''; // Limpiar el contenido existente
+
+            acusados.forEach(acusado => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><button data-id='${acusado.id}' type='button' class='btn btn-danger delete-btn-acusado btn-sm'><i data-id='${acusado.id}' class="fas fa-solid fa-trash delete-btn-acusado"></i></button></td>
+                    <td>${acusado.nombre}</td>
+                    <td>${acusado.apellido1}</td>
+                    <td>${acusado.apellido2}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Renderizado inicial de la tabla
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTableAcusados(acusados);
+            document.querySelector('#itemsTableAcusado').addEventListener('click', handleDeleteAcusadoClick);
+        });
+
+        // event listener para agregar nuevos acusados a la tabla
+        document.getElementById('btn-agregar-acusado').addEventListener('click', function() {
+            // declaracion del nuevo acusado
+            const nombreInput = document.getElementById('nombre_acusado')
+            const apellido1Input = document.getElementById('apellido1_acusado')
+            const apellido2Input = document.getElementById('apellido2_acusado')
+
+            const nombre = nombreInput.value
+            const apellido1 = apellido1Input.value
+            const apellido2 = apellido2Input.value
+            contadorAcusados++
+            const nuevoAcusado = {id: contadorAcusados, nombre: nombre, apellido1: apellido1, apellido2: apellido2}
+
+            acusados.push(nuevoAcusado)
+            // Crea una nueva fila
+            const tableBody = document.getElementById('body-table-acusados');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><button data-id='${nuevoAcusado.id}' type='button' class='btn btn-danger delete-btn-acusado btn-sm'><i data-id='${nuevoAcusado.id}' class="fas fa-solid fa-trash delete-btn-acusado"></i></button></td>
+                <td>${nuevoAcusado.nombre}</td>
+                <td>${nuevoAcusado.apellido1}</td>
+                <td>${nuevoAcusado.apellido2}</td>
+            `;
+            tableBody.appendChild(newRow);
+
+            // limpiamos los valores del formulario
+            nombreInput.value = ''
+            apellido1Input.value = ''
+            apellido2Input.value = ''
+        });
+
+        function handleDeleteAcusadoClick(event) {
+            if (!event.target.classList.contains('delete-btn-acusado')) return;
+            const id = event.target.getAttribute('data-id');
+
+            const row = event.target.closest('tr');
+            row.remove();
+        }
+    </script>
+
+    <script>
+        let victimas = []
+        let contadorVictimas = 0
+
+        function renderTableVictimas(victimas) {
+            const tableBody = document.getElementById('body-table-victimas');
+            tableBody.innerHTML = ''; // Limpiar el contenido existente
+
+            victimas.forEach(victima => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><button data-id='${victima.id}' id='btn-delete-victima-0' type='button' class='btn btn-danger btn-sm delete-btn-victima'><i data-id='${victima.id}' class="fas fa-solid fa-trash delete-btn-victima"></i></button></td>
+                    <td>${victima.nombre}</td>
+                    <td>${victima.apellido1}</td>
+                    <td>${victima.apellido2}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Renderizado inicial de la tabla
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTableVictimas(victimas);
+            document.querySelector('#itemsTableVictimas').addEventListener('click', handleDeleteVictimaClick);
+        });
+
+        // event listener para agregar nuevos acusados a la tabla
+        document.getElementById('btn-agregar-victimas').addEventListener('click', function() {
+            // declaracion del nuevo acusado
+            const nombreInput = document.getElementById('nombre_victima')
+            const apellido1Input = document.getElementById('apellido1_victima')
+            const apellido2Input = document.getElementById('apellido2_victima')
+
+            const nombre = nombreInput.value
+            const apellido1 = apellido1Input.value
+            const apellido2 = apellido2Input.value
+            contadorVictimas++
+            const nuevaVictima = {id: contadorVictimas, nombre: nombre, apellido1: apellido1, apellido2: apellido2}
+
+            acusados.push(nuevaVictima)
+            // Crea una nueva fila
+            const tableBody = document.getElementById('body-table-victimas');
+            const newRow = document.createElement('tr');
+            newRow.innerHTML = `
+                <td><button data-id='${nuevaVictima.id}' type='button' class='btn btn-danger btn-sm delete-btn-victima'><i data-id='${nuevaVictima.id}' class="fas fa-solid fa-trash delete-btn-victima"></i></button></td>
+                <td>${nuevaVictima.nombre}</td>
+                <td>${nuevaVictima.apellido1}</td>
+                <td>${nuevaVictima.apellido2}</td>
+            `;
+            tableBody.appendChild(newRow);
+
+            // limpiamos los valores del formulario
+            nombreInput.value = ''
+            apellido1Input.value = ''
+            apellido2Input.value = ''
+        });
+
+        // eliminar victima
+        function handleDeleteVictimaClick(event) {
+            if (!event.target.classList.contains('delete-btn-victima')) return;
+            const id = event.target.getAttribute('data-id');
+
+            const row = event.target.closest('tr');
+            row.remove();
+        }
+    </script>
 
     <script>
         // BS-Stepper Init

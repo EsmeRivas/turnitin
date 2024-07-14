@@ -15,6 +15,10 @@
     <link rel="stylesheet" href="{{asset('css/adminlte.min.css')}}">
     <!-- Custom styles -->
     <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+    <!-- Bootstrap Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <!-- Material Design Icons CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/@mdi/font/css/materialdesignicons.min.css" rel="stylesheet">
     @yield('styles')
 </head>
 
