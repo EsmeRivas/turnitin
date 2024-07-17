@@ -59,13 +59,6 @@ class TocaController extends Controller
 
         $tocas = DB::select($GET_TOCAS);
 
-        //$usernameCookie = FacadesRequest::cookie('username');
-//
-        //if ($usernameCookie === '' || $usernameCookie === null)
-        //{
-        //    return redirect('/login');
-        //}
-
         return view('tocas.index', compact('tocas'));
     }
 

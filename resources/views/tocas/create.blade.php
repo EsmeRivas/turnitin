@@ -229,7 +229,19 @@
                                         </div>
                                         <input id="personal_autorizado" type="text" name="personal_autorizado"
                                                class="form-control">
-                                    </div>                                   
+                                    </div>
+                                    <div class="mb-3">
+                                        <div class="list-group">
+                                            <a class="list-group-item list-group-item-action" aria-current="true">
+                                                <button data-id='1' type='button' class='btn btn-danger btn-sm delete-btn-personalautorizado'><i data-id='1' class="fas fa-solid fa-trash delete-btn-personalautorizado"></i></button>
+                                                Jose Alexis Vazquez Morales
+                                            </a>
+                                            <a class="list-group-item list-group-item-action" aria-current="true">
+                                                <button data-id='2' type='button' class='btn btn-danger btn-sm delete-btn-personalautorizado'><i data-id='2' class="fas fa-solid fa-trash delete-btn-personalautorizado"></i></button>
+                                                Esmeralda Rivas Luna
+                                            </a>
+                                        </div>
+                                    </div>
 
                                     <button type="button" class="btn btn-primary" onclick="stepper.previous()">
                                         Anterior
@@ -249,6 +261,7 @@
     <script src="{{asset('plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
+    {{-- Acusados --}}
     <script>
         let acusados = []
         let contadorAcusados = 0
@@ -315,6 +328,7 @@
         }
     </script>
 
+    {{-- Victimas --}}
     <script>
         let victimas = []
         let contadorVictimas = 0
@@ -380,6 +394,34 @@
             const row = event.target.closest('tr');
             row.remove();
         }
+    </script>
+
+    {{-- Personal autorizado --}}
+    <script>
+        let personalAutorizado = []
+        let contadorPersonalAutorizado = 0
+
+        function renderPersonalAutorizado(personalAutorizado) {
+            const tableBody = document.getElementById('body-table-victimas');
+            tableBody.innerHTML = ''; // Limpiar el contenido existente
+
+            victimas.forEach(victima => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><button data-id='${victima.id}' id='btn-delete-victima-0' type='button' class='btn btn-danger btn-sm delete-btn-victima'><i data-id='${victima.id}' class="fas fa-solid fa-trash delete-btn-victima"></i></button></td>
+                    <td>${victima.nombre}</td>
+                    <td>${victima.apellido1}</td>
+                    <td>${victima.apellido2}</td>
+                `;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Renderizado inicial de la tabla
+        document.addEventListener('DOMContentLoaded', () => {
+            renderTableVictimas(victimas);
+            document.querySelector('#itemsTableVictimas').addEventListener('click', handleDeleteVictimaClick);
+        });
     </script>
 
     <script>
