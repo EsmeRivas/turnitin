@@ -28,6 +28,11 @@ class Toca extends Model
         return $this->hasMany(Parte::class);
     }
 
+    public function personal_autorizado(): hasMany
+    {
+        return $this->hasMany(Parte::class);
+    }
+
     public function ctg_tipo_recurso(): belongsTo
     {
         return $this->belongsTo(CtgTipoRecurso::class);
