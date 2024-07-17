@@ -40,7 +40,8 @@ class TocaController extends Controller
         	ctgapelos.nombre_tipo_apelo as tipoApelo,
         	ctgpon.nombre_ponencia as ponencia,
         	concat(pers.nombre, ' ', pers.apellido1, ' ', pers.apellido2) as ponente,
-        	ctgmes.nombre_mesa as mesaAsignada
+        	ctgmes.nombre_mesa as mesaAsignada,
+            'EN PROCESO' as status
         from tocas as toc
         inner join delitos as deli on deli.toca_id = toc.id
         inner join ctg_delitos as ctgDeli on ctgDeli.id = deli.ctg_delito_id

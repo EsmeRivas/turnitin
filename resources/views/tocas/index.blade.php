@@ -46,11 +46,7 @@
 
                         <th>Mesa Asignada</th>                       
                         
-                        
-
-
-
-
+                        <th>Status</th>
 
                     </tr>
                     </thead>
@@ -70,6 +66,11 @@
                             <td>{{$toca->ponencia}}</td>
                             <td>{{$toca->ponente}}</td>
                             <td>{{$toca->mesaasignada}}</td>
+                            {{-- <td>{{$toca->status}}</td> --}}
+                            {{-- <td>{{ print_r($toca) }}</td> --}}
+                            <td>
+                                <input type="text" id="status" name="status" value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" style="width: 200px">
+                            </td>
                         </tr>
                     @endforeach
                     </tbody>
@@ -81,5 +82,9 @@
 @endsection('content')
 @section('scripts')
 <script>
+    //convertir a mayúsculas el texto ingresado en formulario
+    function convertirMayusculas(input) {
+        input.value = input.value.toUpperCase();
+    }
 </script>
 @endsection('scripts')
