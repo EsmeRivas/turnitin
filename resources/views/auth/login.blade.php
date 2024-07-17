@@ -56,6 +56,15 @@
                         </div>
                     </div>
                 </div>
+                {{-- Mensaje de error para las credenciales --}}
+                @if (session('error'))
+                    <div id="error-message" class="alert alert-warning" role="alert">
+                        {{ session('error') }}
+                    </div>
+                    @php
+                        session()->forget('error');
+                    @endphp
+                @endif
                 <div class="row">
                     <div class="col-12">
                         <button type="submit" class="btn btn-primary">Iniciar sesión</button>
@@ -74,6 +83,17 @@
 <script src="{{asset('plugins/jquery/jquery.min.js')}}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{asset('plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+
+<script>
+    // Se busca el elemento, si se encuentra se establace su estilo de visualizacion para ocutarlo despues de 5 segundos
+    setTimeout(function() {
+        var errorMessage = document.getElementById('error-message');
+        if (errorMessage) {
+            errorMessage.style.display = 'none';
+        }
+    }, 5000);
+</script>
+
 </body>
 
 </html>

@@ -55,7 +55,7 @@ class LoginController extends Controller
         }
 
         // Authentication failed
-        return back()->withErrors(['Datos incorrectos.']);
+        return redirect()->route('login')->with(['error' => 'Usuario o Contraseña Incorrectos']);
     }
     // Método para redirigir después del inicio de sesión
     protected function redirectTo()
