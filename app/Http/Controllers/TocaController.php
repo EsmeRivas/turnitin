@@ -41,7 +41,7 @@ class TocaController extends Controller
         	ctgpon.nombre_ponencia as ponencia,
         	concat(pers.nombre, ' ', pers.apellido1, ' ', pers.apellido2) as ponente,
         	ctgmes.nombre_mesa as mesaAsignada,
-            'EN PROCESO' as status
+            toc.status
         from tocas as toc
         inner join delitos as deli on deli.toca_id = toc.id
         inner join ctg_delitos as ctgDeli on ctgDeli.id = deli.ctg_delito_id
@@ -80,6 +80,7 @@ class TocaController extends Controller
     public function store(Request $request)
     {
         $idUserCookie = FacadesRequest::cookie('id_user');
+        $status = 'EN PROCESO';
 
         #se crea la toca
         $toca = Toca::create([
@@ -90,6 +91,7 @@ class TocaController extends Controller
             'ctg_area_id' => $request->ctg_area_id,
             'mesa_id' => $request->mesa_id,
             'user_id' => $idUserCookie,
+            'status' => $status,
         ]);
 
         #SE CREA EL DELITO

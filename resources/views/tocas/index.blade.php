@@ -26,7 +26,7 @@
 
                         <th>No.Proceso<br>(expediente)</th>
 
-                        <th>Imputado(encontra de)</th>
+                        <th>Imputado(en contra de)</th>
 
                         <th>Victima(s)</th>
 
