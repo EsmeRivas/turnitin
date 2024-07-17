@@ -223,23 +223,15 @@
                                     <label for="personal_autorizado">Añadir personal autorizado</label>
                                     <div class="input-group mb-3">
                                         <div class="input-group-prepend">
-                                            <button type="button" class="btn btn-success"><i
+                                            <button id="btn-agregar-personalautorizado" type="button" class="btn btn-success"><i
                                                     class="fas fa-plus"></i> Agregar
                                             </button>
                                         </div>
-                                        <input id="personal_autorizado" type="text" name="personal_autorizado"
+                                        <input id="nombre-personal-autorizado" type="text" name="personal_autorizado"
                                                class="form-control">
                                     </div>
                                     <div class="mb-3">
-                                        <div class="list-group">
-                                            <a class="list-group-item list-group-item-action" aria-current="true">
-                                                <button data-id='1' type='button' class='btn btn-danger btn-sm delete-btn-personalautorizado'><i data-id='1' class="fas fa-solid fa-trash delete-btn-personalautorizado"></i></button>
-                                                Jose Alexis Vazquez Morales
-                                            </a>
-                                            <a class="list-group-item list-group-item-action" aria-current="true">
-                                                <button data-id='2' type='button' class='btn btn-danger btn-sm delete-btn-personalautorizado'><i data-id='2' class="fas fa-solid fa-trash delete-btn-personalautorizado"></i></button>
-                                                Esmeralda Rivas Luna
-                                            </a>
+                                        <div class="list-group" id="body-table-personalautorizado">
                                         </div>
                                     </div>
 
@@ -368,7 +360,7 @@
             contadorVictimas++
             const nuevaVictima = {id: contadorVictimas, nombre: nombre, apellido1: apellido1, apellido2: apellido2}
 
-            acusados.push(nuevaVictima)
+            victimas.push(nuevaVictima)
             // Crea una nueva fila
             const tableBody = document.getElementById('body-table-victimas');
             const newRow = document.createElement('tr');
@@ -402,16 +394,16 @@
         let contadorPersonalAutorizado = 0
 
         function renderPersonalAutorizado(personalAutorizado) {
-            const tableBody = document.getElementById('body-table-victimas');
+            const tableBody = document.getElementById('body-table-personalautorizado');
             tableBody.innerHTML = ''; // Limpiar el contenido existente
 
-            victimas.forEach(victima => {
-                const row = document.createElement('tr');
+            personalAutorizado.forEach(persona => {
+                const row = document.createElement('div')
                 row.innerHTML = `
-                    <td><button data-id='${victima.id}' id='btn-delete-victima-0' type='button' class='btn btn-danger btn-sm delete-btn-victima'><i data-id='${victima.id}' class="fas fa-solid fa-trash delete-btn-victima"></i></button></td>
-                    <td>${victima.nombre}</td>
-                    <td>${victima.apellido1}</td>
-                    <td>${victima.apellido2}</td>
+                    <a class="list-group-item list-group-item-action" aria-current="true">
+                        <button data-id='1' type='button' class='btn btn-danger btn-sm delete-btn-personalautorizado'><i data-id='1' class="fas fa-solid fa-trash delete-btn-personalautorizado"></i></button>
+                        ${persona.nombre}
+                    </a>
                 `;
                 tableBody.appendChild(row);
             });
@@ -419,9 +411,43 @@
 
         // Renderizado inicial de la tabla
         document.addEventListener('DOMContentLoaded', () => {
-            renderTableVictimas(victimas);
-            document.querySelector('#itemsTableVictimas').addEventListener('click', handleDeleteVictimaClick);
+            renderPersonalAutorizado(personalAutorizado);
+            document.querySelector('#body-table-personalautorizado').addEventListener('click', handleDeletePersonalAutorizadoClick);
         });
+
+        // event listener para agregar nuevos acusados a la tabla
+        document.getElementById('btn-agregar-personalautorizado').addEventListener('click', function() {
+            // declaracion del nuevo acusado
+            const inputNombrePersonalAutorizado = document.getElementById('nombre-personal-autorizado')
+
+            const nombrePersonalAutorizado = inputNombrePersonalAutorizado.value
+            contadorPersonalAutorizado++
+            const nuevoPersonalAutorizado = {id: contadorPersonalAutorizado, nombre: nombrePersonalAutorizado}
+
+            personalAutorizado.push(nuevoPersonalAutorizado)
+            // Crea una nueva fila
+            const tableBody = document.getElementById('body-table-personalautorizado');
+            const newRow = document.createElement('div');
+            newRow.innerHTML = `
+                <a class="list-group-item list-group-item-action" aria-current="true">
+                    <button data-id='${nuevoPersonalAutorizado.id}' type='button' class='btn btn-danger btn-sm delete-btn-personalautorizado'><i data-id='${nuevoPersonalAutorizado.id}' class="fas fa-solid fa-trash delete-btn-personalautorizado"></i></button>
+                    ${nuevoPersonalAutorizado.nombre}
+                </a>
+            `;
+            tableBody.appendChild(newRow);
+
+            // limpiamos los valores del formulario
+            inputNombrePersonalAutorizado.value = ''
+        });
+        
+        // eliminar personal autorizado
+        function handleDeletePersonalAutorizadoClick(event) {
+            if (!event.target.classList.contains('delete-btn-personalautorizado')) return;
+            const id = event.target.getAttribute('data-id');
+
+            const row = event.target.closest('div'); 
+            row.remove();
+        }
     </script>
 
     <script>
