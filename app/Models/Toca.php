@@ -28,7 +28,7 @@ class Toca extends Model
         return $this->hasMany(Parte::class);
     }
 
-    public function personal_autorizado(): hasMany
+    public function personal_autorizados(): hasMany
     {
         return $this->hasMany(Parte::class);
     }

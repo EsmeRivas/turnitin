@@ -8,18 +8,20 @@
                 <h3 class="card-title">TOCAS</h3>
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
-                        <input type="search" name="table_search" class="form-control float-right" placeholder="Search">
+                        <input type="search" id="table_search" oninput="searchTable()" name="table_search" class="form-control float-right" placeholder="Search">
+                        <i class="fas fa-search"></i>
                         <div class="input-group-append">
-                            <button type="submit" class="btn btn-default">
+                            
+                            {{-- <button type="submit" onclick="searchTable()" class="btn btn-default">
                                 <i class="fas fa-search"></i>
-                            </button>
+                            </button> --}}
                         </div>
                     </div>
                 </div>
             </div>
 
             <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
+                <table id="my_table" class="table table-hover text-nowrap">
                     <thead>
                     <tr>
                         <th>No.Toca</th>
@@ -86,5 +88,38 @@
     function convertirMayusculas(input) {
         input.value = input.value.toUpperCase();
     }
+
+    //Funcion para el input de buscar en la tabla de tocas
+    function searchTable() {
+      var input = document.getElementById("table_search");
+      var filter = input.value.toUpperCase();
+      var table = document.getElementById("my_table");
+      var rows = table.getElementsByTagName("tr");
+      
+      for (var i = 1; i < rows.length; i++) {
+        var cells = rows[i].getElementsByTagName("td");
+        var found = false;
+        
+        for (var j = 0; j < cells.length; j++) {
+          var cell = cells[j];
+          
+          if (cell) {
+            var text = cell.textContent || cell.innerText;
+            
+            if (text.toUpperCase().indexOf(filter) > -1) {
+              found = true;
+              break;
+            }
+          }
+        }
+        
+        if (found) {
+          rows[i].style.display = "";
+        } else {
+          rows[i].style.display = "none";
+        }
+      }
+    }
+
 </script>
 @endsection('scripts')

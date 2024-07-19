@@ -42,206 +42,204 @@
                                 </button>
                             </div>
                         </div>
-                        <form method="post" action="{{route('view.toca.store')}}">
+                        <div class="bs-stepper-content">
                             @csrf
-                            <!--PASO 1-->
-                            <div class="bs-stepper-content">
-                                <div id="informacion_toca" class="content" role="tabpanel"
-                                     aria-labelledby="informacion_toca-trigger" >
-                                     
-                                    <div class="form-group">
-                                    <label for="num_toca">Numero de Toca</label>
-                                    <input type="text" class="form-control" id="numero_toca"
-                                    placeholder="Introduce el numero de la toca" name="numero_toca">
-                                    </div>
+                            <div id="informacion_toca" class="content" role="tabpanel"
+                                 aria-labelledby="informacion_toca-trigger" >
+                                 
+                                <div class="form-group">
+                                <label for="num_toca">Numero de Toca</label>
+                                <input type="text" class="form-control" id="numero_toca"
+                                placeholder="Introduce el numero de la toca" name="numero_toca">
+                                </div>
 
-                                    <div class="form-group">
-                                    <label for="num_proceso">Numero de proceso (expediente)</label>
-                                    <input type="text" class="form-control" id="numero_expediente"
-                                    placeholder="Introduce el numero de expediente" name="numero_expediente">
-                                    </div>
-                                    
+                                <div class="form-group">
+                                <label for="num_proceso">Numero de proceso (expediente)</label>
+                                <input type="text" class="form-control" id="numero_expediente"
+                                placeholder="Introduce el numero de expediente" name="numero_expediente">
+                                </div>
+                                
 
-                                    <div class="form-group">
-                                    <label for="mesa_id">¿A que mesa se asignará?</label>
-                                    <select id="mesa_id" name="mesa_id" class="form-control">
-                                    <option value="" disabled selected>Seleccione una opción</option>
-                                        @foreach($mesas as $mesa)
-                                            <option value="{{$mesa->id}}">{{$mesa->nombre_mesa}}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                    <label for="mesa_id">¿A que area se asignará?</label>
-                                    <select id="ctg_area_id" name="ctg_area_id" required class="form-control">
-                                    <option value="" disabled selected>Seleccione una opción</option>
-                                        @foreach($areas as $area)
-                                            <option value="{{ $area->id }}">{{ $area->nombre_centro_trabajo }}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                <label for="mesa_id">¿A que mesa se asignará?</label>
+                                <select id="mesa_id" name="mesa_id" class="form-control">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                    @foreach($mesas as $mesa)
+                                        <option value="{{$mesa->id}}">{{$mesa->nombre_mesa}}</option>
+                                    @endforeach
                                     </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                    <label for="ponencias"> ¿A qué ponencia pertenece? </label>
-                                    <select id="ponencias" name="ponencias" class="form-control" required>
-                                    <option value="" disabled selected>Seleccione una opción</option>
-                                        @foreach($ponencias as $ponencia)
-                                            <option value="{{$ponencia->id}}">{{$ponencia->nombre_ponencia}}</option>
-                                        @endforeach
-                                        </select>
-                                    </div>
-
-                                    <button type="button" class="btn btn-primary" onclick="stepper.next()">Siguiente
-                                    </button>  
                                 </div>
-                                <!--PASO 2-->
-                                <div id="informacion_partes" class="content" role="tabpanel"
-                                     aria-labelledby="informacion_partes-trigger">
-                                    <div class="row">
-                                        <div class="col-sm-6">
-                                            <h4>IMPUTADO (EN CONTRA DE):</h4>
-                                            <div class="form-group clearfix">
-                                                <label for="nombre_acusado">Nombre Acusado</label>
-                                                <input id="nombre_acusado" type="text" class="form-control"
-                                                       name="nombre_acusado" onblur="convertirMayusculas(this)">
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <label for="apellido1_acusado">Primero apellido</label>
-                                                <input id="apellido1_acusado" type="text" class="form-control"
-                                                       name="apellido1_acusado" onblur="convertirMayusculas(this)">
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <label for="apellido2_acusado">Segundo apellido</label>
-                                                <input id="apellido2_acusado" type="text" class="form-control"
-                                                       name="apellido2_acusado" onblur="convertirMayusculas(this)">
-                                            </div>
-                                            <div class="d-flex justify-content-end">
-                                                <button id="btn-agregar-acusado" type="button" class="btn btn-success">AGREGAR</button>
-                                            </div>
-                                            <div class="table-responsive p-0 mt-2">
-                                                <table class="table table-hover text-nowrap" id="itemsTableAcusado">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Nombre acusado</th>
-                                                            <th>Primer apellido</th>
-                                                            <th>Segundo apellido</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="body-table-acusados">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-6">
-                                            <h4>VICTIMA</h4>
-                                            <div class="form-group clearfix">
-                                                <label for="nombre_victima">Nombre victima</label>
-                                                <input id="nombre_victima" type="text" class="form-control"
-                                                       name="nombre_victima" onblur="convertirMayusculas(this)">
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <label for="apellido1_victima">Primer apellido</label>
-                                                <input id="apellido1_victima" type="text" class="form-control"
-                                                       name="apellido1_victima" onblur="convertirMayusculas(this)">
-                                            </div>
-                                            <div class="form-group clearfix">
-                                                <label for="apellido2_victima">Segundo apellido</label>
-                                                <input id="apellido2_victima" type="text" class="form-control"
-                                                       name="apellido2_victima" onblur="convertirMayusculas(this)">
-                                            </div>
-                                            <div class="d-flex justify-content-end">
-                                                <button id="btn-agregar-victimas" type="button" class="btn btn-success">AGREGAR</button>
-                                            </div>
-                                            <div class="table-responsive p-0 mt-2">
-                                                <table class="table table-hover text-nowrap" id="itemsTableVictimas">
-                                                    <thead>
-                                                        <tr>
-                                                            <th></th>
-                                                            <th>Nombre victima</th>
-                                                            <th>Primer apellido</th>
-                                                            <th>Segundo apellido</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody id="body-table-victimas">
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>  
-                                    </div>
-                                    <button type="button" class="btn btn-primary" onclick="stepper.previous()">
-                                        Anterior
-                                    </button>
-                                    <button type="button" class="btn btn-primary" onclick="stepper.next()">Siguiente
-                                    </button>
+                                
+                                <div class="form-group">
+                                <label for="mesa_id">¿A que area se asignará?</label>
+                                <select id="ctg_area_id" name="ctg_area_id" required class="form-control">
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                    @foreach($areas as $area)
+                                        <option value="{{ $area->id }}">{{ $area->nombre_centro_trabajo }}</option>
+                                    @endforeach
+                                </select>
                                 </div>
-                                <div id="informacion_general" class="content" role="tabpanel"
-                                     aria-labelledby="informacion_general-trigger">
 
-                                    <!--PASO 3-->
-                                    <div class="form-group">
-                                        <label for="delitos"> Tipo de Delito</label>
-                                        <select id="delitos" name="delitos" class="form-control" required>
-                                            @foreach($delitos as $delito)
-                                                <option value="{{$delito->id}}">{{$delito->nombre_delito}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="distrito">Distrito</label>
-                                        <select id="distrito" class="form-control" name="distrito" required>
-                                        <option value="" disabled selected>Seleccione una opción</option>
-                                            @foreach($distritos as $distrito)
-                                                <option
-                                                    value="{{$distrito->id}}">{{$distrito->nombre_distrito}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                    <label for="vias"> ¿Qué vía es? </label>
-                                    <select id="vias" name="vias" class="form-control" required>
-                                    <option value="" disabled selected>Seleccione una opción</option>
-                                        @foreach($vias as $via)
-                                            <option value="{{$via->id}}">{{$via->es_auto ? 'AUTO' : 'SENTENCIA'}}</option>
-                                        @endforeach
+                                <div class="form-group">
+                                <label for="ponencias"> ¿A qué ponencia pertenece? </label>
+                                <select id="ponencias" name="ponencias" class="form-control" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                    @foreach($ponencias as $ponencia)
+                                        <option value="{{$ponencia->id}}">{{$ponencia->nombre_ponencia}}</option>
+                                    @endforeach
                                     </select>
-                                    </div>
-                                    
-                                    <div class="form-group">
-                                        <label for="apelos"> ¿Quien apeló? </label>
-                                        <select id="apelos" name="apelos" class="form-control" required>
-                                        <option value="" disabled selected>Seleccione una opción</option>
-                                            @foreach($apelos as $apelo)
-                                                <option value="{{$apelo->id}}">{{$apelo->nombre_tipo_apelo}}</option>
-                                            @endforeach
-                                        </select>
-                                    </div>          
-                                    
-                                    <label for="personal_autorizado">Añadir personal autorizado</label>
-                                    <div class="input-group mb-3">
-                                        <div class="input-group-prepend">
-                                            <button id="btn-agregar-personalautorizado" type="button" class="btn btn-success"><i
-                                                    class="fas fa-plus"></i> Agregar
-                                            </button>
-                                        </div>
-                                        <input id="nombre-personal-autorizado" type="text" name="personal_autorizado"
-                                               class="form-control">
-                                    </div>
-                                    <div class="mb-3">
-                                        <div class="list-group" id="body-table-personalautorizado">
-                                        </div>
-                                    </div>
-
-                                    <button type="button" class="btn btn-primary" onclick="stepper.previous()">
-                                        Anterior
-                                    </button>
-                                    <button type="submit" class="btn btn-primary">Registrar Toca</button>
                                 </div>
+
+                                <button type="button" class="btn btn-primary" onclick="stepper.next()">Siguiente
+                                </button>  
                             </div>
-                        </form>
+                            <!--PASO 2-->
+                            <div id="informacion_partes" class="content" role="tabpanel"
+                                 aria-labelledby="informacion_partes-trigger">
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <h4>IMPUTADO (EN CONTRA DE):</h4>
+                                        <div class="form-group clearfix">
+                                            <label for="nombre_acusado">Nombre Acusado</label>
+                                            <input id="nombre_acusado" type="text" class="form-control"
+                                                   name="nombre_acusado" onblur="convertirMayusculas(this)">
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="apellido1_acusado">Primero apellido</label>
+                                            <input id="apellido1_acusado" type="text" class="form-control"
+                                                   name="apellido1_acusado" onblur="convertirMayusculas(this)">
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="apellido2_acusado">Segundo apellido</label>
+                                            <input id="apellido2_acusado" type="text" class="form-control"
+                                                   name="apellido2_acusado" onblur="convertirMayusculas(this)">
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button id="btn-agregar-acusado" type="button" class="btn btn-success">AGREGAR</button>
+                                        </div>
+                                        <div class="table-responsive p-0 mt-2">
+                                            <table class="table table-hover text-nowrap" id="itemsTableAcusado">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Nombre acusado</th>
+                                                        <th>Primer apellido</th>
+                                                        <th>Segundo apellido</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="body-table-acusados">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <h4>VICTIMA</h4>
+                                        <div class="form-group clearfix">
+                                            <label for="nombre_victima">Nombre victima</label>
+                                            <input id="nombre_victima" type="text" class="form-control"
+                                                   name="nombre_victima" onblur="convertirMayusculas(this)">
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="apellido1_victima">Primer apellido</label>
+                                            <input id="apellido1_victima" type="text" class="form-control"
+                                                   name="apellido1_victima" onblur="convertirMayusculas(this)">
+                                        </div>
+                                        <div class="form-group clearfix">
+                                            <label for="apellido2_victima">Segundo apellido</label>
+                                            <input id="apellido2_victima" type="text" class="form-control"
+                                                   name="apellido2_victima" onblur="convertirMayusculas(this)">
+                                        </div>
+                                        <div class="d-flex justify-content-end">
+                                            <button id="btn-agregar-victimas" type="button" class="btn btn-success">AGREGAR</button>
+                                        </div>
+                                        <div class="table-responsive p-0 mt-2">
+                                            <table class="table table-hover text-nowrap" id="itemsTableVictimas">
+                                                <thead>
+                                                    <tr>
+                                                        <th></th>
+                                                        <th>Nombre victima</th>
+                                                        <th>Primer apellido</th>
+                                                        <th>Segundo apellido</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="body-table-victimas">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>  
+                                </div>
+                                <button type="button" class="btn btn-primary" onclick="stepper.previous()">
+                                    Anterior
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="stepper.next()">Siguiente
+                                </button>
+                            </div>
+                            <!--PASO 3-->
+                            <div id="informacion_general" class="content" role="tabpanel"
+                                 aria-labelledby="informacion_general-trigger">
+
+                                <!--PASO 3-->
+                                <div class="form-group">
+                                    <label for="delitos"> Tipo de Delito</label>
+                                    <select id="delitos" name="delitos" class="form-control" required>
+                                        @foreach($delitos as $delito)
+                                            <option value="{{$delito->id}}">{{$delito->nombre_delito}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="distrito">Distrito</label>
+                                    <select id="distrito" class="form-control" name="distrito" required>
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                        @foreach($distritos as $distrito)
+                                            <option
+                                                value="{{$distrito->id}}">{{$distrito->nombre_distrito}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                <label for="vias"> ¿Qué vía es? </label>
+                                <select id="vias" name="vias" class="form-control" required>
+                                <option value="" disabled selected>Seleccione una opción</option>
+                                    @foreach($vias as $via)
+                                        <option value="{{$via->id}}">{{$via->es_auto ? 'AUTO' : 'SENTENCIA'}}</option>
+                                    @endforeach
+                                </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="apelos"> ¿Quien apeló? </label>
+                                    <select id="apelos" name="apelos" class="form-control" required>
+                                    <option value="" disabled selected>Seleccione una opción</option>
+                                        @foreach($apelos as $apelo)
+                                            <option value="{{$apelo->id}}">{{$apelo->nombre_tipo_apelo}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>          
+                                
+                                <label for="personal_autorizado">Añadir personal autorizado</label>
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <button id="btn-agregar-personalautorizado" type="button" class="btn btn-success"><i
+                                                class="fas fa-plus"></i> Agregar
+                                        </button>
+                                    </div>
+                                    <input id="nombre-personal-autorizado" type="text" name="personal_autorizado"
+                                           class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <div class="list-group" id="body-table-personalautorizado">
+                                    </div>
+                                </div>
+
+                                <button type="button" class="btn btn-primary" onclick="stepper.previous()">
+                                    Anterior
+                                </button>
+                                <button id="btn-registrar-toca" class="btn btn-primary">Registrar Toca</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -253,8 +251,8 @@
     <script src="{{asset('plugins/bs-stepper/js/bs-stepper.min.js')}}"></script>
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
-    {{-- Acusados --}}
     <script>
+        // {{-- Acusados --}}
         let acusados = []
         let contadorAcusados = 0
 
@@ -318,10 +316,8 @@
             const row = event.target.closest('tr');
             row.remove();
         }
-    </script>
 
-    {{-- Victimas --}}
-    <script>
+        // {{-- Victimas --}}
         let victimas = []
         let contadorVictimas = 0
 
@@ -386,10 +382,8 @@
             const row = event.target.closest('tr');
             row.remove();
         }
-    </script>
 
-    {{-- Personal autorizado --}}
-    <script>
+        // {{-- Personal autorizado --}}
         let personalAutorizado = []
         let contadorPersonalAutorizado = 0
 
@@ -448,6 +442,74 @@
             const row = event.target.closest('div'); 
             row.remove();
         }
+
+        // REGISTRAR TOCA
+        document.getElementById('btn-registrar-toca').addEventListener('click', function() {
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            
+            const inputNumeroToca = document.getElementById('numero_toca')
+            const inputNumeroExpediente = document.getElementById('numero_expediente')
+            const inputMesaID = document.getElementById('mesa_id')
+            const inputAreaID = document.getElementById('ctg_area_id')
+            const inputPonencias = document.getElementById('ponencias')
+            const inputDelito = document.getElementById('delitos')
+            const inputDistrito = document.getElementById('distrito')
+            const inputVia = document.getElementById('vias')
+            const inputApelos = document.getElementById('apelos')
+
+            const numeroToca = inputNumeroToca.value
+            const numeroExpediente = inputNumeroExpediente.value
+            const mesaID = inputMesaID.value
+            const areaID = inputAreaID.value
+            const ponencia = inputPonencias.value
+            const delito = inputDelito.value
+            const distrito = inputDistrito.value
+            const via = inputVia.value
+            const apelos = inputApelos.value
+
+            const tocaData = 
+            {
+                acusados: acusados,
+                victimas: victimas,
+                personalAutorizado: personalAutorizado,
+                tocaInfo: 
+                {
+                    numeroToca: numeroToca,
+                    numeroExpediente: numeroExpediente,
+                    mesaID: mesaID,
+                    areaID: areaID,
+                    ponencia: ponencia,
+                    delito: delito,
+                    distrito: distrito,
+                    via: via,
+                    apelos: apelos,
+                    estatus: 'EN PROCESO'
+                }
+            }
+
+            fetch('/store', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify({ tocaData })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data)
+                })
+
+            /*const axios = require('axios');
+            
+            axios.post('/store', { tocaData })
+            .then(response => {
+                console.log(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });*/
+        })
     </script>
 
     <script>

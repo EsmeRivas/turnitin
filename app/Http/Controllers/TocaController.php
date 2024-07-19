@@ -12,6 +12,7 @@ use App\Models\Parte;
 use App\Models\Persona;
 use App\Models\CtgApelo;
 use App\Models\CtgVia;
+use App\Models\PersonalAutorizado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -22,13 +23,13 @@ class TocaController extends Controller
     {
         $GET_TOCAS = 
         "select toc.id, toc.numero_toca, toc.numero_expediente, 
-        	(select CONCAT(imp.nombre,' ',imp.apellido1,' ',imp.apellido2) imputado
+        	(select string_agg(concat(imp.nombre,' ',imp.apellido1,' ',imp.apellido2),', ') imputado
         	from partes prts
         	inner join personas imp on imp.id = prts.persona_id
         	where prts.ctg_tipo_parte_id = 2
         	and prts.toca_id = toc.id
         	limit 1),
-        	(select CONCAT(vic.nombre,' ',vic.apellido1,' ',vic.apellido2) victima
+        	(select string_agg(concat(vic.nombre,' ',vic.apellido1,' ',vic.apellido2),', ') victima
         	from partes prts
         	inner join personas vic on vic.id = prts.persona_id
         	where prts.ctg_tipo_parte_id = 1
@@ -80,65 +81,92 @@ class TocaController extends Controller
     public function store(Request $request)
     {
         $idUserCookie = FacadesRequest::cookie('id_user');
-        $status = 'EN PROCESO';
+        $apeloId = $request->tocaData['tocaInfo']['apelos'];
+        $areaID = $request->tocaData['tocaInfo']['areaID'];
+        $delitoID = $request->tocaData['tocaInfo']['delito'];
+        $distrito = $request->tocaData['tocaInfo']['distrito'];
+        $estatus = $request->tocaData['tocaInfo']['estatus'];
+        $mesaID = $request->tocaData['tocaInfo']['mesaID'];
+        $numeroExpediente = $request->tocaData['tocaInfo']['numeroExpediente'];
+        $numeroToca = $request->tocaData['tocaInfo']['numeroToca'];
+        $ponencia = $request->tocaData['tocaInfo']['ponencia'];
+        $via = $request->tocaData['tocaInfo']['via'];
+        $victimas = $request->tocaData['victimas'];
+        $acusados = $request->tocaData['acusados'];
+        $personalAutorizado = $request->tocaData['personalAutorizado'];
 
         #se crea la toca
         $toca = Toca::create([
-            'numero_toca' => $request->numero_toca,
-            'numero_expediente' => $request->numero_expediente,
-            'ctg_via_id' => $request->vias,
-            'ctg_apelo_id' => $request->apelos,   
-            'ctg_area_id' => $request->ctg_area_id,
-            'mesa_id' => $request->mesa_id,
+            'numero_toca' => $numeroToca,
+            'numero_expediente' => $numeroExpediente,
+            'ctg_via_id' => $via,
+            'ctg_apelo_id' => $apeloId,   
+            'ctg_area_id' => $areaID,
+            'mesa_id' => $mesaID,
             'user_id' => $idUserCookie,
-            'status' => $status,
+            'status' => $estatus,
         ]);
 
         #SE CREA EL DELITO
         $delito = Delito::create([
-            'ctg_delito_id' => $request->delitos,
+            'ctg_delito_id' => $delitoID,
         ]);
         #se asocia el delito a la toca
         $delito->toca()->associate($toca->id);
         $delito->save();
 
         #SE CREA LA VICTIMA
-        $victima = Persona::create([
-            'nombre' => $request->nombre_victima,
-            'apellido1' => $request->apellido1_victima,
-            'apellido2' => $request->apellido2_victima,
-        ]);
-
-        #se crea la parte victima y se asocia a la toca
-        $parte_victima = Parte::create([
-            'toca_id' => $toca->id,
-            'ctg_tipo_parte_id' => 2,
-        ]);
-
-        #se asocia la victima a la parte victima
-        $victima->partes()->save($parte_victima);
+        foreach ($victimas as $victima) {
+            $victima = Persona::create([
+                'nombre' => $victima['nombre'],
+                'apellido1' => $victima['apellido1'],
+                'apellido2' => $victima['apellido2'],
+            ]);
+    
+            #se crea la parte victima y se asocia a la toca
+            $parte_victima = Parte::create([
+                'persona_id' => $victima->id,
+                'toca_id' => $toca->id,
+                'ctg_tipo_parte_id' => 2,
+            ]);
+    
+            #se asocia la victima a la parte victima
+            $victima->partes()->save($parte_victima);
+            $victima->save();
+        }
         
         #SE CREA EL ACUSADO
-        $acusado = Persona::create([
-            'nombre' => $request->nombre_acusado,
-            'apellido1' => $request->apellido1_acusado,
-            'apellido2' => $request->apellido2_acusado,
-        ]);
+        foreach ($acusados as $acusado) {
+            $acusado = Persona::create([
+                'nombre' => $acusado['nombre'],
+                'apellido1' => $acusado['apellido1'],
+                'apellido2' => $acusado['apellido2'],
+            ]);
+    
+            #se crea la parte acusado y se asocia a la toca
+            $parte_acusado = Parte::create([
+                'persona_id' => $acusado->id,
+                'toca_id' => $toca->id,
+                'ctg_tipo_parte_id' => 1,
+            ]);
 
-        #se crea la parte acusado y se asocia a la toca
-        $parte_acusado = Parte::create([
-            'toca_id' => $toca->id,
-            'ctg_tipo_parte_id' => 1,
-        ]); 
+            #se asocia el acusado a la parte acusado
+            $acusado->partes()->save($parte_acusado);
+            $acusado->save();
+        }
+
+        foreach ($personalAutorizado as $personaAutorizada) {
+            $personalAutoriasoResult = PersonalAutorizado::create([
+                'nombre' => $personaAutorizada['nombre'],
+                'toca_id' => $toca->id
+            ]);
+        }
 
         # Se asocia la ponencia a la toca
-        $toca->ctg_ponencia()->associate($request->ponencias);
+        $toca->ctg_ponencia()->associate($ponencia);
         $toca->save();
         
-        #se asocia el acusado a la parte acusado
-        $acusado->partes()->save($parte_acusado);
-
-        return redirect()->route('view.toca.index');
+        return redirect()->route('login');
     }
 
     public function show(string $id)

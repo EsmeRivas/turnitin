@@ -12,7 +12,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('personal_autorizado', function (Blueprint $table) {
+        Schema::create('personal_autorizados', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
             // $table->foreignId('toca_id')->constrained('tocas');
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('personal_autorizado');
+        Schema::dropIfExists('personal_autorizados');
     }
 };
