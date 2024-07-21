@@ -495,20 +495,11 @@
                 },
                 body: JSON.stringify({ tocaData })
             })
-                .then(response => response.json())
-                .then(data => {
-                    console.log(data)
-                })
-
-            /*const axios = require('axios');
-            
-            axios.post('/store', { tocaData })
             .then(response => {
-                console.log(response.data);
+                if (response.status === 200) {
+                    window.location.href = '/'
+                }
             })
-            .catch(error => {
-                console.log(error);
-            });*/
         })
     </script>
 

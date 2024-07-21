@@ -15,6 +15,7 @@ use App\Models\CtgVia;
 use App\Models\PersonalAutorizado;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
 class TocaController extends Controller
@@ -165,8 +166,17 @@ class TocaController extends Controller
         # Se asocia la ponencia a la toca
         $toca->ctg_ponencia()->associate($ponencia);
         $toca->save();
+
+        $mesas = CtgMesa::orderBy('id')->get();
+        $areas = CtgArea::orderBy('id')->get();
+        $ponencias = CtgPonencia::orderBy('id')->get();
         
-        return redirect()->route('login');
+        $delitos = CtgDelito::orderBy('nombre_delito')->get();
+        $distritos = Distrito::orderBy('nombre_distrito')->get();
+        $apelos = CtgApelo::orderBy('nombre_tipo_apelo')->get();
+        $vias = CtgVia::orderBy('id')->get();
+        $user = User::orderby('id')->get();
+        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','user'));
     }
 
     public function show(string $id)

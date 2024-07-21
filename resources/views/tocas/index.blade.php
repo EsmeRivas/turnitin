@@ -58,8 +58,8 @@
                         <tr>
                             <td>{{$toca->numero_toca}}</td>
                             <td>{{$toca->numero_expediente}}</td>
-                            <td>{{$toca->imputado}}</td>
-                            <td>{{$toca->victima}}</td>
+                            <td class="ajuste-texto">{{$toca->imputado}}</td>
+                            <td class="ajuste-texto">{{$toca->victima}}</td>
                             <td>{{$toca->delito}}</td>
                             <td>{{$toca->nombre_distrito}}</td>
                             <td>{{$toca->via}}</td>
