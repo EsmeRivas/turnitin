@@ -179,6 +179,20 @@ class TocaController extends Controller
         return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','user'));
     }
 
+    public function updatestatus(Request $request)
+    {
+        $status = $request->tocaInfo['status'];
+        $numeroToca = $request->tocaInfo['numeroToca'];
+
+        $query = "UPDATE tocas SET status = ? WHERE numero_toca = ?;";
+
+        $resultSetToca = DB::update($query, [$status, $numeroToca]);
+
+        return response()->json(['message' => 'Estatus actualizado'])
+            ->header('Content-Type', 'application/json')
+            ->setStatusCode(200);
+    }
+
     public function show(string $id)
     {
     }

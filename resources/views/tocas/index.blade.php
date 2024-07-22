@@ -54,6 +54,7 @@
                     </thead>
 
                     <tbody>
+                    @csrf
                     @foreach($tocas as $toca)
                         <tr>
                             <td>{{$toca->numero_toca}}</td>
@@ -71,7 +72,7 @@
                             {{-- <td>{{$toca->status}}</td> --}}
                             {{-- <td>{{ print_r($toca) }}</td> --}}
                             <td>
-                                <input type="text" id="status" name="status" value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" style="width: 200px">
+                                <input type="text" id="{{$toca->numero_toca}}" name="status" value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" style="width: 200px" onkeyup="actualizarStatusToca(event, this)">
                             </td>
                         </tr>
                     @endforeach
@@ -119,6 +120,35 @@
           rows[i].style.display = "none";
         }
       }
+    }
+
+    function actualizarStatusToca(event, input) {
+        if (event.keyCode === 13) {
+            event.preventDefault();
+            const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            
+            const numeroToca = input.id
+            const status = input.value
+
+            const tocaInfo = {
+                numeroToca: numeroToca,
+                status: status
+            }
+
+            fetch('/updatestatus', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRF-TOKEN': token
+                },
+                body: JSON.stringify({ tocaInfo })
+            })
+            .then(response => {
+                if (response.status === 200) {
+                    window.location.href = '/'
+                }
+            })
+        }
     }
 
 </script>
