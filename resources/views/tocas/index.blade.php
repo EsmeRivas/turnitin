@@ -9,7 +9,7 @@
                 <div class="card-tools">
                     <div class="input-group input-group-sm" style="width: 150px;">
                         <input type="search" id="table_search" oninput="searchTable()" name="table_search" class="form-control float-right" placeholder="Search">
-                        <i class="fas fa-search"></i>
+                        {{-- <i class="fas fa-search"></i> --}}
                         <div class="input-group-append">
                             
                             {{-- <button type="submit" onclick="searchTable()" class="btn btn-default">
@@ -60,11 +60,11 @@
                     @foreach($tocas as $toca)
                         <tr>
                             <td>
-                                <button data-id='' type='button' class='btn btn-success toca-finalizado btn-sm' data-bs-toggle="tooltip" title="Finalizar toca">
-                                    <i data-id='' class="fas fa-check toca-finalizado"></i>
+                                <button data-id='{{$toca->numero_toca}}' type='button' class='btn btn-success toca-finalizado btn-sm' data-bs-toggle="tooltip" title="Finalizar toca">
+                                    <i data-id='{{$toca->numero_toca}}' class="fas fa-check toca-finalizado"></i>
                                 </button>
-                                <button data-id='' type='button' class='btn btn-warning registrar-amparo btn-sm' data-bs-toggle="tooltip" title="Registrar amparo" data-toggle="modal" data-target="#miModal">
-                                    <i data-id='' class="fas fa-file registrar-amparo"></i>
+                                <button data-id='{{$toca->numero_toca}}' type='button' class='btn btn-warning registrar-amparo btn-sm' data-bs-toggle="tooltip" title="Registrar amparo" data-toggle="modal"  onclick="abrirModal(event, this)">
+                                    <i data-id='{{$toca->numero_toca}}' class="fas fa-file registrar-amparo"></i>
                                 </button>
                             </td>
                             <td>{{$toca->numero_toca}}</td>
@@ -91,35 +91,41 @@
             </div>
         </div>
         <!-- Modal -->
-        <div class="modal" id="miModal">
+        <div class="modal" id="modal-nuevo-amparo">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <!-- Encabezado del modal -->
                     <div class="modal-header">
-                      <h5 class="modal-title">Nuevo amparo - Toca No. 1</h5>
+                      <h5 class="modal-title" id="titulo-modal-nuevo-amparo"></h5>
                       <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <!-- Contenido del modal -->
                     <div class="modal-body">
                         <div class="form-group">
+                            <label for="tipo_amparo">Tipo de amparo</label>
+                            <select id="tipo_amparo" name="tipo_amparo" class="form-control">
+                                <option value="0" disabled selected>Seleccione una opción</option>
+                                <option value="1">Directo</option>
+                                <option value="2">Indirecto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
                             <label for="num_amparo">No de Amparo</label>
-                            <input type="text" class="form-control" id="numero_amparo" placeholder="Escribe el numero de amparo" name="numero_amparo">
+                            <input id='num_amparo' type="text" class="form-control" id="numero_amparo" placeholder="Escribe el numero de amparo" name="numero_amparo">
                         </div>
                         <div class="form-group">
                             <label for="num_oficio">No de Oficio</label>
-                            <input type="text" class="form-control" id="numero_oficio" placeholder="Escribe el numero de oficio" name="numero_oficio">
+                            <input id='num_oficio' type="text" class="form-control" id="numero_oficio" placeholder="Escribe el numero de oficio" name="numero_oficio">
                         </div>
                         <div class="form-group">
                             <label for="colegiado">Colegiado</label>
-                            <input type="text" class="form-control" id="input-colegiado" placeholder="Escribe el colegiado" name="colegiado">
+                            <input id="colegiado" type="text" class="form-control" id="input-colegiado" placeholder="Escribe el colegiado" name="colegiado">
                         </div>
                         <div class="form-group">
                             <label for="quejoso">Quejoso</label>
-                            <select id="mesa_id" name="mesa_id" class="form-control">
-                                <option value="" disabled selected>Seleccione una opción</option>
-                                <option value="1">Jose Alexis Vazquez Morales</option>
-                                <option value="2">Gloria Romo</option>
-                            </select>
+                            <input id="quejoso_nombre" type="text" class="form-control" placeholder="Nombre" name="quejoso-nombre">
+                            <input id="quejoso_apellido1" type="text" class="form-control mt-2" placeholder="Apellido paterno" name="quejoso_apellido1">
+                            <input id="quejoso_apellido2" type="text" class="form-control mt-2" placeholder="Apellido materno" name="quejoso_apellido2">
                         </div>
                         <div class="form-group">
                             <label for="termino">Fecha de termino</label>
@@ -127,6 +133,18 @@
                             <span class="badge badge-warning badge-pill">Vence al rededor de 10 días</span>
                             <span class="badge badge-danger badge-pill">Vence al rededor de 3 días</span>
                             <input type="date" class="form-control" id="input-termino" name="termino">
+                        </div>
+                        <div class="form-group">
+                            <label for="resolucion">Resolución</label>
+                            <select id="resolucion" name="resolucion" class="form-control">
+                                <option value="0" disabled selected>Seleccione una opción</option>
+                                <option value="1">Se concede</option>
+                                <option value="2">Se niega</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fecha-resolucion">Fecha en que se dicta la resolución</label>
+                            <input type="date" class="form-control" id="fecha-resolucion" name="fecha-resolucion">
                         </div>
                     </div>
                     <!-- Pie del modal -->
@@ -142,19 +160,6 @@
 @endsection('content')
 @section('scripts')
 <script>
-    // Obtener la fecha actual y agregar 15 días
-    var fechaActual = new Date();
-    fechaActual.setDate(fechaActual.getDate() + 15);
-    
-    // Formatear la fecha en el formato requerido por el input de tipo date
-    var yyyy = fechaActual.getFullYear();
-    var mm = String(fechaActual.getMonth() + 1).padStart(2, '0');
-    var dd = String(fechaActual.getDate()).padStart(2, '0');
-    var fechaLimite = yyyy + '-' + mm + '-' + dd;
-    
-    // Establecer el límite mínimo y máximo del input de tipo date
-    document.getElementById('input-termino').min = fechaLimite;
-    document.getElementById('input-termino').max = fechaLimite;
 
     //convertir a mayúsculas el texto ingresado en formulario
     function convertirMayusculas(input) {
@@ -222,5 +227,56 @@
         }
     }
 
+    function abrirModal(event, input) {
+        const modalNuevoAmparo = document.getElementById('modal-nuevo-amparo')
+        const numeroToca = event.target.getAttribute('data-id')
+        const tituloModal = document.getElementById('titulo-modal-nuevo-amparo')
+
+        tituloModal.textContent = 'Nuevo amparo - No. Toca ' + numeroToca
+
+        // seccion para limpiar campos del formulario
+        const tipoAmparoSelector = document.getElementById('tipo_amparo')
+        const numAmparoInput = document.getElementById('num_amparo')
+        const numOficioInput = document.getElementById('num_oficio')
+        const colegiadoInput = document.getElementById('colegiado')
+        const nombreQuejosoInput = document.getElementById('quejoso_nombre')
+        const apellido1QuejosoInput = document.getElementById('quejoso_apellido1')
+        const apellido2QuejosoInput = document.getElementById('quejoso_apellido2')
+        const fechaTerminoInput = document.getElementById('input-termino')
+        const resolucionInput = document.getElementById('resolucion')
+        const fechaResolucionInput = document.getElementById('fecha-resolucion')
+
+        tipoAmparoSelector.selectedIndex = 0
+        numAmparoInput.value = ''
+        numOficioInput.value = ''
+        colegiadoInput.value = ''
+        nombreQuejosoInput.value = ''
+        apellido1QuejosoInput.value = ''
+        apellido2QuejosoInput.value = ''
+        fechaTerminoInput.value = ''
+        resolucionInput.selectedIndex = 0
+        fechaResolucionInput.value = ''
+
+        // Funcionalidad para solo habilitar los primeros 15 dias despues del actual para seleccionar
+        var fechaTermino = document.getElementById('input-termino')
+        var fechaActual = new Date()
+
+        var fechaLimite = new Date(fechaActual.getFullYear(), fechaActual.getMonth(), fechaActual.getDate() + 15)
+
+        var fechaLimiteFormateada = fechaLimite.toISOString().split('T')[0]
+
+        fechaTermino.min = fechaActual.toISOString().split('T')[0]
+        fechaTermino.max = fechaLimiteFormateada
+
+        // seccion para mostrar modal
+        let modal = new bootstrap.Modal(modalNuevoAmparo)
+        modal.show()
+    }
+
 </script>
 @endsection('scripts')
+<style>
+    .ajuste-texto {
+        white-space: wrap !important;
+    }
+</style>
