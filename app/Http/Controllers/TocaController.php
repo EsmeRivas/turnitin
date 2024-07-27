@@ -188,8 +188,6 @@ class TocaController extends Controller
         $status = $request->tocaInfo['status'];
         $numeroToca = $request->tocaInfo['numeroToca'];
 
-        return $status;
-
         $query = "UPDATE tocas SET status = ? WHERE numero_toca = ?;";
 
         $resultSetToca = DB::update($query, [$status, $numeroToca]);
