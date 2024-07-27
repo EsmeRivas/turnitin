@@ -24,6 +24,7 @@ Route::controller(TocaController::class)->group(function () {
     Route::get('/create', 'create')->name('view.toca.create')->middleware('authsession');
     Route::post('/store', 'store')->name('view.toca.store')->middleware('authsession');
     Route::post('/updatestatus', 'updatestatus')->name('register.updatestatus')->middleware('authsession');
+    Route::post('/updateStatusFinalizado', 'updateStatusFinalizado')->name('register.updateStatusFinalizado')->middleware('authsession');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

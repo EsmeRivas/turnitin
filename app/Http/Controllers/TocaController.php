@@ -14,6 +14,7 @@ use App\Models\CtgApelo;
 use App\Models\CtgVia;
 use App\Models\PersonalAutorizado;
 use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
@@ -60,7 +61,10 @@ class TocaController extends Controller
         	ctgapelos.nombre_tipo_apelo, ctgpon.nombre_ponencia,
         	pers.nombre, pers.apellido1, pers.apellido2, ctgmes.nombre_mesa";
 
-        $tocas = DB::select($GET_TOCAS);
+        $items = collect(DB::select($GET_TOCAS));
+        $page = request()->get('page', 1);
+        $perPage = 15;
+        $tocas = new LengthAwarePaginator($items->forPage($page, $perPage)->values(), $items->count(), $perPage, $page);
 
         return view('tocas.index', compact('tocas'));
     }
@@ -184,11 +188,27 @@ class TocaController extends Controller
         $status = $request->tocaInfo['status'];
         $numeroToca = $request->tocaInfo['numeroToca'];
 
+        return $status;
+
         $query = "UPDATE tocas SET status = ? WHERE numero_toca = ?;";
 
         $resultSetToca = DB::update($query, [$status, $numeroToca]);
 
         return response()->json(['message' => 'Estatus actualizado'])
+            ->header('Content-Type', 'application/json')
+            ->setStatusCode(200);
+    }
+
+    public function updateStatusFinalizado(Request $request)
+    {
+        $status = $request->dataToca['status'];
+        $numeroToca = $request->dataToca['numeroToca'];
+
+        $query = "UPDATE tocas SET status = 'FINALIZADO' WHERE numero_toca = ?;";
+
+        $resultTocaFinalizado = DB::update($query, [$numeroToca]);
+
+        return response()->json(['message' => 'Estatus de toca como Finalizado'])
             ->header('Content-Type', 'application/json')
             ->setStatusCode(200);
     }

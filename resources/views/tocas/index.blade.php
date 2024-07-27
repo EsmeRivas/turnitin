@@ -7,21 +7,14 @@
             <div class="card-header">
                 <h3 class="card-title">TOCAS</h3>
                 <div class="card-tools">
-                    <div class="input-group input-group-sm" style="width: 150px;">
+                    <div class="input-group input-group-sm" style="width: 200px;">
                         <input type="search" id="table_search" oninput="searchTable()" name="table_search" class="form-control float-right" placeholder="Search">
-                        {{-- <i class="fas fa-search"></i> --}}
-                        <div class="input-group-append">
-                            
-                            {{-- <button type="submit" onclick="searchTable()" class="btn btn-default">
-                                <i class="fas fa-search"></i>
-                            </button> --}}
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="card-body table-responsive p-0">
-                <table id="my_table" class="table table-hover text-nowrap">
+            <div class="card-body table-responsive p-0" style="height: 400px">
+                <table id="my_table" class="table table-hover text-nowrap table-fixed">
                     <thead>
                     <tr>
                         <th></th>
@@ -60,10 +53,20 @@
                     @foreach($tocas as $toca)
                         <tr>
                             <td>
-                                <button data-id='{{$toca->numero_toca}}' type='button' class='btn btn-success toca-finalizado btn-sm' data-bs-toggle="tooltip" title="Finalizar toca">
-                                    <i data-id='{{$toca->numero_toca}}' class="fas fa-check toca-finalizado"></i>
+                                <button id='{{$toca->numero_toca}}' value="{{ $toca->status }}" 
+                                    type='button' class='btn btn-success toca-finalizado btn-sm' 
+                                    data-bs-toggle="tooltip" title="Finalizar toca" onclick="updateStatusTocaFinalizado(event, this)"
+                                    @if ($toca->status == 'FINALIZADO')
+                                        @disabled(true)
+                                    @endif>
+                                    <i id='{{$toca->numero_toca}}' class="fas fa-check toca-finalizado"></i>
                                 </button>
-                                <button data-id='{{$toca->numero_toca}}' type='button' class='btn btn-warning registrar-amparo btn-sm' data-bs-toggle="tooltip" title="Registrar amparo" data-toggle="modal"  onclick="abrirModal(event, this)">
+                                <button data-id='{{$toca->numero_toca}}' type='button' 
+                                    class='btn btn-warning registrar-amparo btn-sm' data-bs-toggle="tooltip" 
+                                    title="Registrar amparo" data-toggle="modal"  onclick="abrirModal(event, this)"
+                                    @if ($toca->status == 'FINALIZADO')
+                                        @disabled(true)
+                                    @endif>
                                     <i data-id='{{$toca->numero_toca}}' class="fas fa-file registrar-amparo"></i>
                                 </button>
                             </td>
@@ -82,12 +85,42 @@
                             {{-- <td>{{$toca->status}}</td> --}}
                             {{-- <td>{{ print_r($toca) }}</td> --}}
                             <td>
-                                <input type="text" id="{{$toca->numero_toca}}" name="status" value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" style="width: 200px" onkeyup="actualizarStatusToca(event, this)">
+                                <input type="text" id="{{$toca->numero_toca}}" name="status" 
+                                    value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" 
+                                    style="width: 200px" onkeyup="actualizarStatusToca(event, this)"
+                                    @if ( $toca->status == 'FINALIZADO' )
+                                        @disabled(true)
+                                    @endif>
+                                </input>
                             </td>
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+                
+            </div>
+            <div>
+                <nav aria-label="Page navigation example">
+                    <ul class="pagination">
+                        <!-- Botón "Previous" -->
+                        <li class="page-item {{ $tocas->onFirstPage() ? 'disabled' : '' }}">
+                            <a class="page-link" href="{{ $tocas->previousPageUrl() }}">Previous</a>
+                        </li>
+                
+                        <!-- Números de página -->
+                        @for ($i = 1; $i <= $tocas->lastPage(); $i++)
+                            <li class="page-item {{ $tocas->currentPage() == $i ? 'active' : '' }}">
+                                <a class="page-link" href="{{ $tocas->url($i) }}">{{ $i }}</a>
+                            </li>
+                        @endfor
+                
+                        <!-- Botón "Next" -->
+                        <li class="page-item {{ $tocas->hasMorePages() ? '' : 'disabled' }}">
+                            <a class="page-link" href="{{ $tocas->nextPageUrl() }}">Next</a>
+                        </li>
+                        Showing {{ $tocas->firstItem() }} to {{ $tocas->lastItem() }} of {{ $tocas->total() }} registers
+                    </ul>
+                </nav>
             </div>
         </div>
         <!-- Modal -->
@@ -227,6 +260,34 @@
         }
     }
 
+    function updateStatusTocaFinalizado(event, input) {
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        
+        const numeroToca = input.id
+        const status = input.value
+
+        // console.log(input.id, 'numero toca');
+
+        const dataToca = {
+            numeroToca: numeroToca,
+            status: status
+        }
+
+        fetch('/updateStatusFinalizado', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            },
+            body: JSON.stringify({ dataToca })
+        })
+        .then(response => {
+            if (response.status === 200) {
+                window.location.href = '/'
+            }
+        })
+    }
+
     function abrirModal(event, input) {
         const modalNuevoAmparo = document.getElementById('modal-nuevo-amparo')
         const numeroToca = event.target.getAttribute('data-id')
@@ -276,7 +337,43 @@
 </script>
 @endsection('scripts')
 <style>
-    .ajuste-texto {
-        white-space: wrap !important;
-    }
+.ajuste-texto {
+    white-space: wrap !important;
+}
+/* Fixear los headers*/
+.table-fixed thead {
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: #f0f0f0;
+}
+/* Estilos personalizados para la paginación */
+.pagination {
+display: flex;
+justify-content: center;
+align-items: center;
+list-style: none;
+padding: 0;
+}
+
+.pagination li {
+    margin: 0 5px;
+}
+
+.pagination a,
+.pagination span {
+    display: inline-block;
+    padding: 5px 10px;
+    text-decoration: none;
+    color: #333;
+}
+
+.pagination .active a {
+    background-color: #007bff;
+    color: white;
+}
+
+.pagination .disabled span {
+    opacity: 0.5;
+}
 </style>
