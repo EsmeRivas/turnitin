@@ -61,13 +61,13 @@
                                     @endif>
                                     <i id='{{$toca->numero_toca}}' class="fas fa-check toca-finalizado"></i>
                                 </button>
-                                <button data-id='{{$toca->numero_toca}}' type='button' 
+                                <button id="{{$toca->id}}" data-id='{{$toca->numero_toca}}' type='button' 
                                     class='btn btn-warning registrar-amparo btn-sm' data-bs-toggle="tooltip" 
                                     title="Registrar amparo" data-toggle="modal"  onclick="abrirModal(event, this)"
                                     @if ($toca->status == 'FINALIZADO')
                                         @disabled(true)
                                     @endif>
-                                    <i data-id='{{$toca->numero_toca}}' class="fas fa-file registrar-amparo"></i>
+                                    <i id="{{$toca->id}}" data-id='{{$toca->numero_toca}}' class="fas fa-file registrar-amparo"></i>
                                 </button>
                             </td>
                             <td>{{$toca->numero_toca}}</td>
@@ -134,6 +134,11 @@
                     </div>
                     <!-- Contenido del modal -->
                     <div class="modal-body">
+                        @csrf
+                        <div class="form-group">
+                            <label for="toca_id">Toca ID</label>
+                            <input id="toca_id" type="text" class="form-control" placeholder="Toca ID" name="toca_id" disabled>
+                        </div>
                         <div class="form-group">
                             <label for="tipo_amparo">Tipo de amparo</label>
                             <select id="tipo_amparo" name="tipo_amparo" class="form-control">
@@ -182,8 +187,11 @@
                     </div>
                     <!-- Pie del modal -->
                     <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-                      <button type="button" class="btn btn-primary">Registrar</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+                        <button id="btn-registrar-amparo" type="button" class="btn btn-primary">
+                            <span id="spinnerCreateAmparo" class="spinner-border spinner-border-sm" aria-hidden="true" style="display: none"></span>
+                            <span role="status">Registrar</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -296,6 +304,7 @@
         tituloModal.textContent = 'Nuevo amparo - No. Toca ' + numeroToca
 
         // seccion para limpiar campos del formulario
+        const tocaIDInput = document.getElementById('toca_id')
         const tipoAmparoSelector = document.getElementById('tipo_amparo')
         const numAmparoInput = document.getElementById('num_amparo')
         const numOficioInput = document.getElementById('num_oficio')
@@ -307,6 +316,9 @@
         const resolucionInput = document.getElementById('resolucion')
         const fechaResolucionInput = document.getElementById('fecha-resolucion')
 
+        const tocaID = event.target.getAttribute('id')
+
+        tocaIDInput.value = tocaID
         tipoAmparoSelector.selectedIndex = 0
         numAmparoInput.value = ''
         numOficioInput.value = ''
@@ -333,6 +345,91 @@
         let modal = new bootstrap.Modal(modalNuevoAmparo)
         modal.show()
     }
+
+    document.getElementById('btn-registrar-amparo').addEventListener('click', function() {
+        const btnRegistrarAmparo = document.getElementById('btn-registrar-amparo')
+        const spinnerCreateAmparo = document.getElementById('spinnerCreateAmparo')
+        spinnerCreateAmparo.style.display = 'inline-block'
+        btnRegistrarAmparo.disabled = true
+        
+        // obtengo los datos del formulario
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        const tocaIdInput = document.getElementById('toca_id')
+        const tipoAmparoInput = document.getElementById('tipo_amparo')
+        const numeroAmparoInput = document.getElementById('num_amparo')
+        const numeroOficioInput = document.getElementById('num_oficio')
+        const colegiadoInput = document.getElementById('colegiado')
+        const quejosoNombreInput = document.getElementById('quejoso_nombre')
+        const quejosoApellido1Input = document.getElementById('quejoso_apellido1')
+        const quejosoApellido2Input = document.getElementById('quejoso_apellido2')
+        const inputTermino = document.getElementById('input-termino')
+        const resolucionInput = document.getElementById('resolucion')
+        const fechaResolucionInput = document.getElementById('fecha-resolucion')
+
+        const tocaID = tocaIdInput.value
+        const tipoAmparo = tipoAmparoInput.value
+        const numeroAmparo = numeroAmparoInput.value
+        const numeroOficio = numeroOficioInput.value
+        const colegiado = colegiadoInput.value
+        const quejosoNombre = quejosoNombreInput.value
+        const quejosoApellido1 = quejosoApellido1Input.value
+        const quejosoApellido2 = quejosoApellido2Input.value
+        const termino = inputTermino.value
+        const resolucion = resolucionInput.value
+        const fechaResolucion = fechaResolucionInput.value
+
+        const amparoData =
+        {
+            tocaID: tocaID,
+            tipoAmparo: tipoAmparo, 
+            numeroAmparo: numeroAmparo, 
+            numeroOficio: numeroOficio,
+            colegiado: colegiado, 
+            quejosoNombre: quejosoNombre,
+            quejosoApellido1: quejosoApellido1,
+            quejosoApellido2: quejosoApellido2,
+            termino: termino,
+            resolucion: resolucion,
+            fechaResolucion: fechaResolucion
+        }
+
+        const modalNuevoAmparo = document.getElementById('modal-nuevo-amparo')
+        const modalBackground = document.querySelector('.modal-backdrop')
+
+        fetch('/amparo/api/store', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            },
+            body: JSON.stringify({ amparoData })
+        }).then(response => {
+            if (response.status === 200) {
+                toastr.options = {
+                    "progressBar": true,
+                    "closeButton": true
+                }
+                toastr.success("Se ha registrado el amparo", '', {timeOut: 7000})
+
+                spinnerCreateAmparo.style.display = 'none'
+                btnRegistrarAmparo.disabled = false
+
+                tipoAmparoInput.selectedIndex = 0
+                numeroAmparoInput.value = ''
+                numeroOficioInput.value = ''
+                colegiadoInput.value = ''
+                quejosoNombreInput.value = ''
+                quejosoApellido1Input.value = ''
+                quejosoApellido2Input.value = ''
+                inputTermino.value = ''
+                resolucionInput.selectedIndex = 0
+                fechaResolucionInput.value = ''
+
+                modalNuevoAmparo.style.display = 'none'
+                modalBackground.style.display = 'none'
+            }
+        })
+    })
 
 </script>
 @endsection('scripts')

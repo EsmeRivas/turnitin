@@ -164,7 +164,8 @@ class InfoSeeder extends Seeder
 
         $ctg_partes = [
             ['nombre_tipo_parte' => 'ACUSADO'],
-            ['nombre_tipo_parte' => 'VICTIMA']
+            ['nombre_tipo_parte' => 'VICTIMA'],
+            ['nombre_tipo_parte' => 'QUEJOSO']
         ];
 
         $mesas_relacion = [

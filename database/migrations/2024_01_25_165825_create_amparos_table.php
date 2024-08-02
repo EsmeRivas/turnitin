@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Schema;
 
 return new class extends Migration {
@@ -12,12 +13,16 @@ return new class extends Migration {
     {
         Schema::create('amparos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('tipo_amparo')->nullable();
             $table->string('numero_amparo', 20)->unique();
-            $table->date('fecha_inicio_amparo');
-            $table->date('fecha_resolucion_amparo')->nullable();
+            $table->string('numero_oficio', 20);
+            $table->string('colegiado', 250)->nullable();
             $table->boolean('tiene_resolucion')->nullable();
             #$table->foreignId('toca_id')->constrained('toca');
-            $table->timestamps();
+            $table->date('fecha_inicio_amparo');
+            $table->date('fecha_resolucion_amparo')->nullable();
+            $table->timestamp('created_at')->default(Date::now()->toDateTimeString());
+            $table->timestamp('updated_at')->default(Date::now()->toDateTimeString());
         });
     }
 

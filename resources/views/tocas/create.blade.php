@@ -237,7 +237,10 @@
                                 <button type="button" class="btn btn-primary" onclick="stepper.previous()">
                                     Anterior
                                 </button>
-                                <button id="btn-registrar-toca" class="btn btn-primary">Registrar Toca</button>
+                                <button id="btn-registrar-toca" class="btn btn-primary">
+                                    <span id="spinnerCreateToca" class="spinner-border spinner-border-sm" aria-hidden="true" style="display: none"></span>
+                                    <span role="status">Registrar Toca</span>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -445,6 +448,11 @@
 
         // REGISTRAR TOCA
         document.getElementById('btn-registrar-toca').addEventListener('click', function() {
+            const btnCreateToca = document.getElementById('btn-registrar-toca')
+            const spinnerCreateToca = document.getElementById('spinnerCreateToca')
+            btnCreateToca.disabled = true
+            spinnerCreateToca.style.display = 'inline-block'
+
             const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
             
             const inputNumeroToca = document.getElementById('numero_toca')
@@ -497,6 +505,14 @@
             })
             .then(response => {
                 if (response.status === 200) {
+                    toastr.options = {
+                        "progressBar": true,
+                        "closeButton": true
+                    }
+                    toastr.success("Se ha registrado el amparo", '', {timeOut: 7000})
+
+                    btnCreateToca.disabled = false
+                    spinnerCreateToca.style.display = 'none'
                     window.location.href = '/'
                 }
             })

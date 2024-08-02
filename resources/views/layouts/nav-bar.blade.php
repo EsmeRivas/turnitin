@@ -42,8 +42,8 @@
                     <a id="dropdownSubMenu2" href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
                        class="nav-link dropdown-toggle">AMPAROS</a>
                     <ul aria-labelledby="dropdownSubMenu2" class="dropdown-menu border-0 shadow">
-                        <li><a href="#" class="dropdown-item">Directo </a></li>
-                        <li><a href="#" class="dropdown-item">Indirecto </a></li>
+                        <li><a href="{{ route('view.amparos.directo') }}" class="dropdown-item">Directo </a></li>
+                        <li><a href="{{ route('view.amparos.indirecto') }}" class="dropdown-item">Indirecto </a></li>
                     </ul>
                 </li>
                 <!-- Usuarios -->
