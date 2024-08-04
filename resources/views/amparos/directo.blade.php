@@ -57,27 +57,27 @@
                             <td>{{$amparo->fecha_resolucion_amparo}}</td>
                             <td>{{$amparo->termino}}</td>
                             <td>
-                                {{-- @if ($amparo->termino > 11 && $amparo->termino < 16)
+                                @if ((int) $amparo->termino > 10)
                                     <span style="color: green; background-color: green;" class="badge rounded-pill">.</span>
-                                @elseif ($amparo->termino >= 4 )
+                                @elseif ((int) $amparo->termino > 3)
                                     <span style="color: orange; background-color: orange;" class="badge rounded-pill">.</span>
-                                @elseif ($amparo->termino < 4)
+                                @elseif ((int) $amparo->termino < 4)
                                     <span style="color: red; background-color: red;" class="badge rounded-pill">.</span>
-                                @endif --}}
+                                @endif
 
                                 {{-- USO DE CASE --}}
-                                @switch($amparo->termino)
-                                    @case($amparo->termino >= 11 && $amparo->termino < 16)
-                                        <span style="color: green; background-color: green;" class="badge rounded-pill">.</span>
-                                        @break
-                                    @case($amparo->termino >= 4 && $amparo->termino = 10)
-                                        <span style="color: orange; background-color: orange;" class="badge rounded-pill">.</span>
-                                        @break
-                                    @case($amparo->termino < 4)
-                                        <span style="color: red; background-color: red;" class="badge rounded-pill">.</span>
-                                        @break
-                                    @default
-                                @endswitch
+                                {{-- @switch($amparo->termino) --}}
+                                    {{-- @case($amparo->termino >= 11 && $amparo->termino < 16) --}}
+                                        {{-- <span style="color: green; background-color: green;" class="badge rounded-pill">.</span> --}}
+                                        {{-- @break --}}
+                                    {{-- @case($amparo->termino >= 4 && $amparo->termino = 10) --}}
+                                        {{-- <span style="color: orange; background-color: orange;" class="badge rounded-pill">.</span> --}}
+                                        {{-- @break --}}
+                                    {{-- @case($amparo->termino < 4) --}}
+                                        {{-- <span style="color: red; background-color: red;" class="badge rounded-pill">.</span> --}}
+                                        {{-- @break --}}
+                                    {{-- @default --}}
+                                {{-- @endswitch --}}
                             </td>
                         </tr>
                     @endforeach
