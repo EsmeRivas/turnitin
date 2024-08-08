@@ -85,7 +85,7 @@
                             {{-- <td>{{$toca->status}}</td> --}}
                             {{-- <td>{{ print_r($toca) }}</td> --}}
                             <td>
-                                <input type="text" id="{{$toca->numero_toca}}" name="status" 
+                                <input type="text" id="{{$toca->numero_toca}}" data-toca="{{$toca->id}}"  name="status" 
                                     value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" 
                                     style="width: 200px" onkeyup="actualizarStatusToca(event, this)"
                                     @if ( $toca->status == 'FINALIZADO' )
@@ -246,10 +246,12 @@
             
             const numeroToca = input.id
             const status = input.value
+            const idToca = input.dataset.toca
 
             const tocaInfo = {
                 numeroToca: numeroToca,
-                status: status
+                status: status,
+                idToca: idToca
             }
 
             fetch('/updatestatus', {

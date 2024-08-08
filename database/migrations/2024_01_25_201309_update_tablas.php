@@ -79,7 +79,7 @@ return new class extends Migration {
             $table->foreignId('toca_id')->nullable()->constrained('tocas');
         });
 
-        Schema::table('observaciones', function (Blueprint $table) {
+        Schema::table('observacions', function (Blueprint $table) {
             $table->foreignId('toca_id')->nullable()->constrained('tocas');
         });
     }
@@ -151,7 +151,7 @@ return new class extends Migration {
             $table->dropForeign(['toca_id']);
         });
 
-        Schema::table('observaciones', function (Blueprint $table) {
+        Schema::table('observacions', function (Blueprint $table) {
             $table->dropForeign(['toca_id']);
         });
     }
