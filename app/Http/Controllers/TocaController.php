@@ -13,6 +13,8 @@ use App\Models\Persona;
 use App\Models\CtgApelo;
 use App\Models\CtgVia;
 use App\Models\PersonalAutorizado;
+use App\Models\Observacion;
+use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\DB;
@@ -171,6 +173,12 @@ class TocaController extends Controller
         $toca->ctg_ponencia()->associate($ponencia);
         $toca->save();
 
+        $observacion = Observacion::create([
+            'observacion' => $estatus,
+            'toca_id' => $toca->id
+        ]);
+
+
         $mesas = CtgMesa::orderBy('id')->get();
         $areas = CtgArea::orderBy('id')->get();
         $ponencias = CtgPonencia::orderBy('id')->get();
@@ -187,10 +195,16 @@ class TocaController extends Controller
     {
         $status = $request->tocaInfo['status'];
         $numeroToca = $request->tocaInfo['numeroToca'];
+        $idToca = $request->tocaInfo['idToca'];
+        $fechaUpdate = date('Y-m-d H:i:s');
 
         $query = "UPDATE tocas SET status = ? WHERE numero_toca = ?;";
 
         $resultSetToca = DB::update($query, [$status, $numeroToca]);
+
+        $queryObservaciones = "INSERT INTO observacions(observacion, updated_at, toca_id) VALUES (?, ?, ?);";
+        
+        $resultSetObservaciones = DB::insert($queryObservaciones, [$status, $fechaUpdate, $idToca]);
 
         return response()->json(['message' => 'Estatus actualizado'])
             ->header('Content-Type', 'application/json')

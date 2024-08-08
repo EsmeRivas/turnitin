@@ -13,7 +13,7 @@ class Toca extends Model
 
     protected $guarded = [];
 
-    public function observaciones(): hasMany
+    public function observacions(): hasMany
     {
         return $this->hasMany(Observacion::class);
     }
