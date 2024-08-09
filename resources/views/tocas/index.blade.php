@@ -43,7 +43,9 @@
 
                         <th>Mesa Asignada</th>                       
                         
-                        <th>Status</th>
+                        <th>Estatus</th>
+
+                        <th>Historial Estatus</th>
 
                     </tr>
                     </thead>
@@ -53,7 +55,7 @@
                     @foreach($tocas as $toca)
                         <tr>
                             <td>
-                                <button id='{{$toca->numero_toca}}' value="{{ $toca->status }}" 
+                                <button id='{{$toca->numero_toca}}' value="{{ $toca->status }}" data-toca="{{$toca->id}}"
                                     type='button' class='btn btn-success toca-finalizado btn-sm' 
                                     data-bs-toggle="tooltip" title="Finalizar toca" onclick="updateStatusTocaFinalizado(event, this)"
                                     @if ($toca->status == 'FINALIZADO')
@@ -82,16 +84,24 @@
                             <td>{{$toca->ponencia}}</td>
                             <td>{{$toca->ponente}}</td>
                             <td>{{$toca->mesaasignada}}</td>
-                            {{-- <td>{{$toca->status}}</td> --}}
-                            {{-- <td>{{ print_r($toca) }}</td> --}}
                             <td>
-                                <input type="text" id="{{$toca->numero_toca}}" data-toca="{{$toca->id}}"  name="status" 
+                                <input type="text" id="{{$toca->numero_toca}}" data-toca="{{$toca->id}}" name="status" 
                                     value="{{ $toca->status }}" class="form-control" onblur="convertirMayusculas(this)" 
                                     style="width: 200px" onkeyup="actualizarStatusToca(event, this)"
                                     @if ( $toca->status == 'FINALIZADO' )
                                         @disabled(true)
                                     @endif>
                                 </input>
+                            </td>
+                            <td style="text-align: center">
+                                <button class="btn btn-primary" style="background: #671222" data-toca="{{ $toca->id }}" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample-{{ $toca->id }}" aria-expanded="false" aria-controls="collapseExample-{{ $toca->id }}">
+                                    Ver
+                                </button>
+                                <div class="collapse" id="collapseExample-{{ $toca->id }}">
+                                    <div class="card card-body">
+                                        <ul></ul>
+                                    </div>
+                                </div>
                             </td>
                         </tr>
                     @endforeach
@@ -202,6 +212,34 @@
 @section('scripts')
 <script>
 
+    var collapseButtons = document.querySelectorAll('[data-bs-target^="#collapseExample-"]');
+
+    collapseButtons.forEach(function(button) {
+        button.addEventListener('click', function() {
+            var idToca = this.getAttribute('data-toca');
+            var collapseElementId = '#collapseExample-' + idToca;
+            var collapseElement = document.querySelector(collapseElementId);
+            historialObservaciones(idToca, collapseElement);
+        });
+    });
+
+    function historialObservaciones(idToca, collapseElement) {
+        fetch('/observaciones/' + idToca)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data, 'data');
+                var observacionesUl = collapseElement.querySelector('ul');
+                observacionesUl.innerHTML = '';
+                data.forEach(observacion => {
+                    var li = document.createElement('li');
+                    li.textContent = `${observacion.observacion} - ${observacion.updated_at}`;
+                    observacionesUl.appendChild(li);
+                });
+                collapseElement.classList.toggle('show');
+            })
+            .catch(error => console.error(error));
+    }
+
     //convertir a mayúsculas el texto ingresado en formulario
     function convertirMayusculas(input) {
         input.value = input.value.toUpperCase();
@@ -275,12 +313,14 @@
         
         const numeroToca = input.id
         const status = input.value
+        const idToca = input.dataset.toca
 
         // console.log(input.id, 'numero toca');
 
         const dataToca = {
             numeroToca: numeroToca,
-            status: status
+            status: status,
+            idToca: idToca
         }
 
         fetch('/updateStatusFinalizado', {

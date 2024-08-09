@@ -215,18 +215,29 @@ class TocaController extends Controller
     {
         $status = $request->dataToca['status'];
         $numeroToca = $request->dataToca['numeroToca'];
+        $idToca = $request->dataToca['idToca'];
+        $fechaFinalizado = date('Y-m-d H:i:s');
+        
+        $query = "UPDATE tocas SET status = 'FINALIZADO', updated_at = ? WHERE numero_toca = ?;";
 
-        $query = "UPDATE tocas SET status = 'FINALIZADO' WHERE numero_toca = ?;";
+        $resultTocaFinalizado = DB::update($query, [$fechaFinalizado, $numeroToca]);
 
-        $resultTocaFinalizado = DB::update($query, [$numeroToca]);
+        $queryObservacion = "INSERT INTO observacions(observacion, updated_at, toca_id) VALUES ('FINALIZADO', ?, ?);";
+        
+        $resultSetObservacionesFin = DB::insert($queryObservacion, [$fechaFinalizado, $idToca]);
 
         return response()->json(['message' => 'Estatus de toca como Finalizado'])
             ->header('Content-Type', 'application/json')
             ->setStatusCode(200);
     }
 
-    public function show(string $id)
+    public function show($idToca)
     {
+        $queryHistoricoStatus = "SELECT observacion, updated_at FROM observacions WHERE toca_id = ?;";
+        
+        $historialStatus = DB::select($queryHistoricoStatus, [$idToca]);
+        
+        return response()->json($historialStatus);
     }
     public function edit(string $id)
     {
