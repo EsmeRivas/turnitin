@@ -19,8 +19,9 @@ return new class extends Migration {
             $table->string('colegiado', 250)->nullable();
             $table->boolean('tiene_resolucion')->nullable();
             #$table->foreignId('toca_id')->constrained('toca');
-            $table->date('fecha_inicio_amparo');
-            $table->date('fecha_resolucion_amparo')->nullable();
+            $table->timestamp('fecha_inicio_amparo')->nullable()->default(Date::now()->toDateTimeString());
+            $table->date('fecha_termino')->nullable();
+            $table->date('fecha_resolucion_final')->nullable();
             $table->timestamp('created_at')->default(Date::now()->toDateTimeString());
             $table->timestamp('updated_at')->default(Date::now()->toDateTimeString());
         });

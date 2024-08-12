@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Request as FacadesRequest;
 
+use function Laravel\Prompts\error;
+
 class AmparoController extends Controller
 {
     public function directo()
@@ -44,8 +46,9 @@ class AmparoController extends Controller
             toc.status,
             amp.created_at,
             amp.fecha_inicio_amparo,
-            amp.fecha_resolucion_amparo,
-            CONCAT((amp.fecha_inicio_amparo::date - CURRENT_DATE), ' días') as termino
+            amp.fecha_termino,
+            amp.fecha_resolucion_final,
+            CONCAT((amp.fecha_termino::date - CURRENT_DATE), ' días') as termino
         from amparos amp 
         left join tocas toc on toc.id = amp.toca_id
         where amp.tipo_amparo = 1;";
@@ -78,8 +81,9 @@ class AmparoController extends Controller
             toc.status,
             amp.created_at,
             amp.fecha_inicio_amparo,
-            amp.fecha_resolucion_amparo,
-            CONCAT((amp.fecha_inicio_amparo::date - CURRENT_DATE), ' días') as termino
+            amp.fecha_termino,
+            amp.fecha_resolucion_final,
+            CONCAT((amp.fecha_termino::date - CURRENT_DATE), ' días') as termino
         from amparos amp 
         left join tocas toc on toc.id = amp.toca_id
         where amp.tipo_amparo = 2;";
@@ -94,55 +98,68 @@ class AmparoController extends Controller
 
     public function store(Request $request)
     {
-        $requestData = $request->amparoData;
+        try 
+        {
+            $requestData = $request->amparoData;
 
-        $tipoAmparo = $requestData['tipoAmparo'];
-        $numeroAmparo = $requestData['numeroAmparo'];
-        $numeroOficio = $requestData['numeroOficio'];
-        $colegiado = $requestData['colegiado'];
-        $fechaInicioAmparo = $requestData['termino'];
-        $fechaResolucionAmparo = $requestData['fechaResolucion'];
-        $tieneResolucion = $requestData['resolucion'] === '1' ? true : false;
-        $tocaID = $requestData['tocaID'];
-        $quejosoNombre = $requestData['quejosoNombre'];
-        $quejosoApellido1 = $requestData['quejosoApellido1'];
-        $quejosoApellido2 = $requestData['quejosoApellido2'];
+            $tipoAmparo = $requestData['tipoAmparo'];
+            $numeroAmparo = $requestData['numeroAmparo'];
+            $numeroOficio = $requestData['numeroOficio'];
+            $colegiado = $requestData['colegiado'];
+            $fechaEstimadaTermino = $requestData['termino']; // fecha estimada de termino
+            $fechaResolucionFinal = $requestData['fechaResolucion']; // fecha de resolucion final
+            $tieneResolucion = $requestData['resolucion'] === '1' ? true : false;
+            $tocaID = $requestData['tocaID'];
+            $quejosoNombre = $requestData['quejosoNombre'];
+            $quejosoApellido1 = $requestData['quejosoApellido1'];
+            $quejosoApellido2 = $requestData['quejosoApellido2'];
 
-        // registramos el amparo
-        $query = "insert into amparos(tipo_amparo, numero_amparo, numero_oficio, colegiado, tiene_resolucion, fecha_inicio_amparo, fecha_resolucion_amparo, toca_id)
-        values(?, ?, ?, ?, ?, ?, ?, ?);";
-        $amparo = collect(DB::insert($query, [$tipoAmparo, $numeroAmparo, $numeroOficio, $colegiado, $tieneResolucion, $fechaInicioAmparo, $fechaResolucionAmparo, $tocaID]));
+            $fechaEstimadaTermino === '' ?? $fechaEstimadaTermino = '0000-00-00';
+            $fechaResolucionFinal === '' ?? $fechaResolucionFinal = '0000-00-00';
 
-        $query = "select amp.id from amparos amp WHERE amp.numero_amparo = ?;";
-        [$amparoId] = collect(DB::table('amparos')->where('numero_amparo', '=', $numeroAmparo)->value('id'));
+            // registramos el amparo
+            $query = "insert into amparos(tipo_amparo, numero_amparo, numero_oficio, colegiado, tiene_resolucion, fecha_resolucion_final, fecha_termino, toca_id)
+            values(?, ?, ?, ?, ?, ?, ?, ?);";
+            $amparo = collect(DB::insert($query, [$tipoAmparo, $numeroAmparo, $numeroOficio, $colegiado, $tieneResolucion, $fechaResolucionFinal, $fechaEstimadaTermino, $tocaID]));
 
-        // registramos el quejoso
-        $quejoso = Persona::create([
-            'nombre' => $quejosoNombre,
-            'apellido1' => $quejosoApellido1,
-            'apellido2' => $quejosoApellido2,
-        ]);
+            $query = "select amp.id from amparos amp WHERE amp.numero_amparo = ?;";
+            [$amparoId] = collect(DB::table('amparos')->where('numero_amparo', '=', $numeroAmparo)->value('id'));
 
-        $parteQuejoso = Parte::create([
-            'persona_id' => $quejoso->id,
-            'toca_id' => $tocaID,
-            'ctg_tipo_parte_id' => 3
-        ]);
+            // registramos el quejoso
+            $quejoso = Persona::create([
+                'nombre' => $quejosoNombre,
+                'apellido1' => $quejosoApellido1,
+                'apellido2' => $quejosoApellido2,
+            ]);
 
-        $quejoso->partes()->save($parteQuejoso);
-        $quejoso->save();
+            $parteQuejoso = Parte::create([
+                'persona_id' => $quejoso->id,
+                'toca_id' => $tocaID,
+                'ctg_tipo_parte_id' => 3
+            ]);
 
-        $amparo = Quejoso::create([
-            'parte_id' => $parteQuejoso->id,
-            'amparo' => $amparoId
-        ]);
+            $quejoso->partes()->save($parteQuejoso);
+            $quejoso->save();
 
-        return response()->json([
-            'result' => true,
-            'message' => 'Amparo registrado',
-            'data' => $amparo->id
-        ])->header('Content-Type', 'application/json')
-        ->setStatusCode(200);
+            $amparo = Quejoso::create([
+                'parte_id' => $parteQuejoso->id,
+                'amparo' => $amparoId
+            ]);
+
+            return response()->json([
+                'result' => true,
+                'message' => 'Amparo registrado',
+                'data' => $amparo->id
+            ])->header('Content-Type', 'application/json')
+            ->setStatusCode(200);
+        } catch (\Throwable $error) {
+            return response()->json([
+                'result' => false,
+                'message' => 'Ha ocurrido un problema al registrar el amparo',
+                'data' => null
+            ])->header('Content-Type', 'application/json')
+            ->setStatusCode(500);
+        }
     }
 
 }

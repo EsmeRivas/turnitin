@@ -33,7 +33,9 @@
 
                         <th>Fecha de inicio</th>
 
-                        <th>Fecha de resolucion</th>
+                        <th>Fecha de termino</th>
+
+                        <th>Fecha en que se dicta resolución</th>
 
                         <td>Termino</td>
 
@@ -54,14 +56,15 @@
                             <td>{{$indirectos->quejoso}}</td>
                             <td>{{$indirectos->status}}</td>
                             <td>{{$indirectos->fecha_inicio_amparo}}</td>
-                            <td>{{$indirectos->fecha_resolucion_amparo}}</td>
+                            <td>{{$indirectos->fecha_termino}}</td>
+                            <td>{{$indirectos->fecha_resolucion_final}}</td>
                             <td>{{$indirectos->termino}}</td>
                             <td>
-                                @if ($indirectos->termino < 16 && $indirectos->termino >= 11)
+                                @if ((int) $indirectos->termino > 10)
                                     <span style="color: green; background-color: green;" class="badge rounded-pill">.</span>
-                                @elseif ($indirectos->termino < 11 && $indirectos->termino >= 4)
+                                @elseif ((int) $indirectos->termino > 3)
                                     <span style="color: orange; background-color: orange;" class="badge rounded-pill">.</span>
-                                @elseif ($indirectos->termino <= 3)
+                                @elseif ((int) $indirectos->termino < 4)
                                     <span style="color: red; background-color: red;" class="badge rounded-pill">.</span>
                                 @endif
                             </td>

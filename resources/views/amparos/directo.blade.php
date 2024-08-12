@@ -33,7 +33,9 @@
 
                         <th>Fecha de inicio</th>
 
-                        <th>Fecha de resolucion</th>
+                        <th>Fecha de termino</th>
+
+                        <th>Fecha en que se dicta resolución</th>
 
                         <th>Termino</th>
 
@@ -54,7 +56,8 @@
                             <td>{{$amparo->quejoso}}</td>
                             <td>{{$amparo->status}}</td>
                             <td>{{$amparo->fecha_inicio_amparo}}</td>
-                            <td>{{$amparo->fecha_resolucion_amparo}}</td>
+                            <td>{{$amparo->fecha_termino}}</td>
+                            <td>{{$amparo->fecha_resolucion_final}}</td>
                             <td>{{$amparo->termino}}</td>
                             <td>
                                 @if ((int) $amparo->termino > 10)
@@ -64,20 +67,6 @@
                                 @elseif ((int) $amparo->termino < 4)
                                     <span style="color: red; background-color: red;" class="badge rounded-pill">.</span>
                                 @endif
-
-                                {{-- USO DE CASE --}}
-                                {{-- @switch($amparo->termino) --}}
-                                    {{-- @case($amparo->termino >= 11 && $amparo->termino < 16) --}}
-                                        {{-- <span style="color: green; background-color: green;" class="badge rounded-pill">.</span> --}}
-                                        {{-- @break --}}
-                                    {{-- @case($amparo->termino >= 4 && $amparo->termino = 10) --}}
-                                        {{-- <span style="color: orange; background-color: orange;" class="badge rounded-pill">.</span> --}}
-                                        {{-- @break --}}
-                                    {{-- @case($amparo->termino < 4) --}}
-                                        {{-- <span style="color: red; background-color: red;" class="badge rounded-pill">.</span> --}}
-                                        {{-- @break --}}
-                                    {{-- @default --}}
-                                {{-- @endswitch --}}
                             </td>
                         </tr>
                     @endforeach

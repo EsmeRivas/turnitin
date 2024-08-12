@@ -469,7 +469,15 @@
 
                 modalNuevoAmparo.style.display = 'none'
                 modalBackground.style.display = 'none'
+            } else if (response.status === 500) {
+                toastr.error("Ha ocurrido un problema", '', {timeOut: 7000})
+                spinnerCreateAmparo.style.display = 'none'
+                btnRegistrarAmparo.disabled = false
             }
+        }).catch(err => {
+            toastr.error("Ha ocurrido un problema", '', {timeOut: 7000})
+            spinnerCreateAmparo.style.display = 'none'
+            btnRegistrarAmparo.disabled = false
         })
     })
 

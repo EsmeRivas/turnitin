@@ -217,7 +217,13 @@
                                             <option value="{{$apelo->id}}">{{$apelo->nombre_tipo_apelo}}</option>
                                         @endforeach
                                     </select>
-                                </div>          
+                                </div> 
+                                
+                                <div class="form-group clearfix">
+                                    <label for="juez">Nombre Juez</label>
+                                    <input id="juez" type="text" class="form-control"
+                                    placeholder="Introduce el nombre del juez"    name="juez" onblur="convertirMayusculas(this)">
+                                </div>
                                 
                                 <label for="personal_autorizado">Añadir personal autorizado</label>
                                 <div class="input-group mb-3">
