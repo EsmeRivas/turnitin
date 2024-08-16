@@ -158,8 +158,8 @@ class InfoSeeder extends Seeder
         ];
 
         $vias = [
-            ['ctg_tipo_recurso_id' => 1],
-            ['ctg_tipo_recurso_id' => 3]
+            ['es_auto' => true, 'ctg_tipo_recurso_id' => 1],
+            ['es_auto' => false, 'ctg_tipo_recurso_id' => 3]
         ];
 
         $ctg_partes = [
@@ -1554,7 +1554,7 @@ class InfoSeeder extends Seeder
 
         foreach ($vias as $via) {
             DB::table('ctg_vias')->insert([
-                'es_auto' => false,
+                'es_auto' => $via['es_auto'],
                 'activo' => true,
                 'ctg_tipo_recurso_id' => $via['ctg_tipo_recurso_id'],
             ]);

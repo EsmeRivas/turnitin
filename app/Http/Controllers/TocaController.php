@@ -12,6 +12,7 @@ use App\Models\Parte;
 use App\Models\Persona;
 use App\Models\CtgApelo;
 use App\Models\CtgVia;
+use App\Models\CtgJuez;
 use App\Models\PersonalAutorizado;
 use App\Models\Observacion;
 use DateTime;
@@ -81,8 +82,9 @@ class TocaController extends Controller
         $distritos = Distrito::orderBy('nombre_distrito')->get();
         $apelos = CtgApelo::orderBy('nombre_tipo_apelo')->get();
         $vias = CtgVia::orderBy('id')->get();
+        $juez = CtgJuez::orderBy('id')->get();
         $user = User::orderby('id')->get();
-        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','user'));
+        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','juez','user'));
     }
 
     public function store(Request $request)
@@ -98,10 +100,14 @@ class TocaController extends Controller
         $numeroToca = $request->tocaData['tocaInfo']['numeroToca'];
         $ponencia = $request->tocaData['tocaInfo']['ponencia'];
         $via = $request->tocaData['tocaInfo']['via'];
+        $tipo = $request->tocaData['tocaInfo']['tipo'];
+        $nombreJuez = $request->tocaData['tocaInfo']['nombreJuez'];
+        $apellido1Juez = $request->tocaData['tocaInfo']['apellido1Juez'];
+        $apellido2Juez = $request->tocaData['tocaInfo']['apellido2Juez'];
         $victimas = $request->tocaData['victimas'];
         $acusados = $request->tocaData['acusados'];
         $personalAutorizado = $request->tocaData['personalAutorizado'];
-
+        
         #se crea la toca
         $toca = Toca::create([
             'numero_toca' => $numeroToca,
@@ -162,6 +168,27 @@ class TocaController extends Controller
             $acusado->save();
         }
 
+        // SE CREA EL JUEZ
+        $juez = Persona::create([
+            'nombre' => $nombreJuez,
+            'apellido1' => $apellido1Juez,
+            'apellido2' => $apellido2Juez,
+        ]);
+        
+        $persona_juez = CtgJuez::create([
+            'persona_id' => $juez->id
+        ]);
+
+        // Se guarda el nombre del Juez
+        $juez->save();
+
+        // Se guarda el id del nombre del juez en CtgJuez
+        $persona_juez->save();
+
+        $toca->ctg_juez()->associate($persona_juez->id);
+        $toca->save();
+
+        // SE CREA PERSONAL AUTORIZADO
         foreach ($personalAutorizado as $personaAutorizada) {
             $personalAutoriasoResult = PersonalAutorizado::create([
                 'nombre' => $personaAutorizada['nombre'],
@@ -187,8 +214,9 @@ class TocaController extends Controller
         $distritos = Distrito::orderBy('nombre_distrito')->get();
         $apelos = CtgApelo::orderBy('nombre_tipo_apelo')->get();
         $vias = CtgVia::orderBy('id')->get();
+        $juez = CtgJuez::orderBy('id')->get();
         $user = User::orderby('id')->get();
-        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','user'));
+        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','juez','user'));
     }
 
     public function updatestatus(Request $request)

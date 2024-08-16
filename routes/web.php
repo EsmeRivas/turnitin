@@ -33,6 +33,8 @@ Route::controller(AmparoController::class)->group(function () {
     Route::get('/amparos/directo', 'directo')->name('view.amparos.directo')->middleware('authsession');
     Route::get('/amparos/indirecto', 'indirecto')->name('view.amparos.indirecto')->middleware('authsession');
     Route::post('/amparo/api/store', 'store')->name('register.registrarAmparo')->middleware('authsession');
+    Route::post('/concederamparo', 'concederAmparo')->name('update.concederAmparo')->middleware('authsession');
+    Route::post('/denegaramparo', 'denegarAmparo')->name('update.denegarAmparo')->middleware('authsession');
 });
 
 Route::post('/logout', [LoginController::class, 'logout'])->name('logout');

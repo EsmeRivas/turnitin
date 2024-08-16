@@ -315,8 +315,6 @@
         const status = input.value
         const idToca = input.dataset.toca
 
-        // console.log(input.id, 'numero toca');
-
         const dataToca = {
             numeroToca: numeroToca,
             status: status,

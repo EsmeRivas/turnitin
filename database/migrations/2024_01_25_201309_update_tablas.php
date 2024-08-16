@@ -45,7 +45,7 @@ return new class extends Migration {
             $table->foreignId('usuario_id')->nullable()->constrained('users');
             $table->foreignId('ctg_ponencia_id')->nullable()->constrained('ctg_ponencias');
             $table->foreignId('ctg_apelo_id')->nullable()->constrained('ctg_apelos');
-            $table->foreignId('ctg_juez_id')->nullable()->constrained('ctg_jueces');
+            $table->foreignId('ctg_juez_id')->nullable()->constrained('ctg_juezs');
             $table->foreignId('ctg_area_id')->nullable()->constrained('ctg_areas');
             $table->foreignId('mesa_id')->nullable()->constrained('mesas');
             $table->foreignId('user_id')->nullable()->constrained('users');
@@ -62,7 +62,7 @@ return new class extends Migration {
             $table->foreignId('amparo')->nullable()->constrained('amparos');
         });
 
-        Schema::table('ctg_jueces', function (Blueprint $table) {
+        Schema::table('ctg_juezs', function (Blueprint $table) {
             $table->foreignId('persona_id')->nullable()->constrained('personas');
         });
 
@@ -134,7 +134,7 @@ return new class extends Migration {
             $table->dropForeign(['amparo']);
         });
 
-        Schema::table('ctg_jueces', function (Blueprint $table) {
+        Schema::table('ctg_juezs', function (Blueprint $table) {
             $table->dropForeign(['persona_id']);
         });
 

@@ -19,7 +19,7 @@ return new class extends Migration {
             #$table->foreignId('usuario_id')->constrained('users');
             #$table->foreignId('ctg_ponencia_id')->constrained('ctg_ponencias');
             #$table->foreignId('ctg_apelo_id')->constrained('ctg_apelos');
-            #$table->foreignId('ctg_juez_id')->constrained('ctg_jueces');
+            #$table->foreignId('ctg_juez_id')->constrained('ctg_juezs');
             #$table->foreignId('ctg_area_id')->constrained('ctg_areas');
             #$table->foreignId('mesa_id')->constrained('mesas');
             #$table->foreignId('user_id')->constrained('users');

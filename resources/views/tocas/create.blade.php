@@ -105,7 +105,7 @@
                                                    name="nombre_acusado" onblur="convertirMayusculas(this)">
                                         </div>
                                         <div class="form-group clearfix">
-                                            <label for="apellido1_acusado">Primero apellido</label>
+                                            <label for="apellido1_acusado">Primer apellido</label>
                                             <input id="apellido1_acusado" type="text" class="form-control"
                                                    name="apellido1_acusado" onblur="convertirMayusculas(this)">
                                         </div>
@@ -208,6 +208,13 @@
                                     @endforeach
                                 </select>
                                 </div>
+
+                                <div class="form-group">
+                                    <label for="tipo"> Tipo de vía </label>
+                                    <select id="tipo" name="tipo" class="form-control" required>
+                                        <option value="" disabled selected>Seleccione una opción</option>
+                                    </select>
+                                </div>
                                 
                                 <div class="form-group">
                                     <label for="apelos"> ¿Quien apeló? </label>
@@ -220,9 +227,22 @@
                                 </div> 
                                 
                                 <div class="form-group clearfix">
-                                    <label for="juez">Nombre Juez</label>
-                                    <input id="juez" type="text" class="form-control"
-                                    placeholder="Introduce el nombre del juez"    name="juez" onblur="convertirMayusculas(this)">
+                                    {{-- <label for="juez">Nombre Juez</label> --}}
+                                    <div class="form-group clearfix">
+                                        <label for="nombre_juez">Nombre Juez</label>
+                                        <input id="nombre_juez" type="text" class="form-control"
+                                               name="nombre_juez" onblur="convertirMayusculas(this)">
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <label for="apellido1_juez">Primer apellido</label>
+                                        <input id="apellido1_juez" type="text" class="form-control"
+                                               name="apellido1_juez" onblur="convertirMayusculas(this)">
+                                    </div>
+                                    <div class="form-group clearfix">
+                                        <label for="apellido2_juez">Segundo apellido</label>
+                                        <input id="apellido2_juez" type="text" class="form-control"
+                                               name="apellido2_juez" onblur="convertirMayusculas(this)">
+                                    </div>
                                 </div>
                                 
                                 <label for="personal_autorizado">Añadir personal autorizado</label>
@@ -261,6 +281,26 @@
     <script src="{{asset('plugins/select2/js/select2.full.min.js')}}"></script>
 
     <script>
+        /* Tipo de via*/
+        document.getElementById('vias').addEventListener('change', function() {
+            var tipoVia = document.getElementById('tipo');
+            tipoVia.innerHTML = '<option value="" disabled selected>Seleccione una opción</option>';
+
+            if (this.value !== '') {
+                var selectedOption = this.options[this.selectedIndex];
+                var esAuto = selectedOption.text === 'AUTO';
+
+                if (esAuto) {
+                    tipoVia.add(new Option('De forma prision', 'forma_prision'));
+                    tipoVia.add(new Option('Vinculación a Proceso', 'vinculacion'));
+                    tipoVia.add(new Option('No Vinculación a Proceso', 'no_vinculacion'));
+                } else {
+                    tipoVia.add(new Option('Condenatoria', 'condenatoria'));
+                    tipoVia.add(new Option('Absolutoria', 'absoluto'));
+                }
+            }
+        });
+
         // {{-- Acusados --}}
         let acusados = []
         let contadorAcusados = 0
@@ -469,6 +509,10 @@
             const inputDelito = document.getElementById('delitos')
             const inputDistrito = document.getElementById('distrito')
             const inputVia = document.getElementById('vias')
+            const inputTipo = document.getElementById('tipo')
+            const inputJuez = document.getElementById('nombre_juez')
+            const inputApellido1Juez = document.getElementById('apellido1_juez')
+            const inputApellido2Juez = document.getElementById('apellido2_juez')
             const inputApelos = document.getElementById('apelos')
 
             const numeroToca = inputNumeroToca.value
@@ -479,6 +523,10 @@
             const delito = inputDelito.value
             const distrito = inputDistrito.value
             const via = inputVia.value
+            const tipo = inputTipo.value
+            const nombreJuez = inputJuez.value
+            const apellido1Juez = inputApellido1Juez.value
+            const apellido2Juez = inputApellido2Juez.value
             const apelos = inputApelos.value
 
             const tocaData = 
@@ -496,6 +544,10 @@
                     delito: delito,
                     distrito: distrito,
                     via: via,
+                    tipo: tipo,
+                    nombreJuez: nombreJuez,
+                    apellido1Juez: apellido1Juez,
+                    apellido2Juez: apellido2Juez,
                     apelos: apelos,
                     estatus: 'EN PROCESO'
                 }

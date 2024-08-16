@@ -16,6 +16,7 @@
                 <table id="table_amparos_directos" class="table table-hover text-nowrap table-fixed">
                     <thead>
                     <tr>
+                        <th></th>
 
                         <th>No. Toca</th>
 
@@ -29,7 +30,9 @@
 
                         <th>Quejoso</th>
 
-                        <th>Estatus</th>
+                        <th>Estatus Toca</th>
+
+                        <th>Resolución</th>
 
                         <th>Fecha de inicio</th>
 
@@ -48,6 +51,24 @@
                     @csrf
                     @foreach($amparos as $amparo)
                         <tr>
+                            <td>
+                                <button id='{{$amparo->id}}' value="{{true}}"
+                                    type='button' class='btn btn-success btn-sm' 
+                                    data-bs-toggle="tooltip" title="Se concede" onclick="concederAmparo(event, this)"
+                                    @if ($amparo->fecha_resolucion_final !== null)
+                                        @disabled(true)
+                                    @endif>
+                                    <i id='{{$amparo->id}}' class="fas fa-check"></i>
+                                </button>
+                                <button id='{{$amparo->id}}' value="{{false}}"
+                                    type='button' class='btn btn-danger btn-sm' 
+                                    data-bs-toggle="tooltip" title="Se niega" onclick="negarAmparo(event, this)"
+                                    @if ($amparo->fecha_resolucion_final !== null)
+                                        @disabled(true)
+                                    @endif>
+                                    <i id='{{$amparo->id}}' class="fas fa-window-close"></i>
+                                </button>
+                            </td>
                             <td>{{$amparo->numero_toca}}</td>
                             <td>{{$amparo->numero_expediente}}</td>
                             <td>{{$amparo->numero_amparo}}</td>
@@ -55,6 +76,13 @@
                             <td>{{$amparo->colegiado}}</td>
                             <td>{{$amparo->quejoso}}</td>
                             <td>{{$amparo->status}}</td>
+                            <td>
+                                @if ($amparo->tiene_resolucion === true)
+                                    Se concede
+                                @elseif ($amparo->tiene_resolucion === false)
+                                    Se niega
+                                @endif
+                            </td>
                             <td>{{$amparo->fecha_inicio_amparo}}</td>
                             <td>{{$amparo->fecha_termino}}</td>
                             <td>{{$amparo->fecha_resolucion_final}}</td>
@@ -134,6 +162,47 @@
             }
         }
     }
+    function concederAmparo(event, data) {
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        const params = {
+            id: data.id,
+            tieneResolucion: data.value
+        }
+
+        fetch('/concederamparo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            },
+            body: JSON.stringify({ params })
+        }).then(response => {
+            if (response.status === 200) {
+                window.location.href = '/amparos/directo'
+            }
+        })
+    }
+    function negarAmparo(event, data) {
+        const token = document.head.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        const params = {
+            id: data.id,
+            tieneResolucion: data.value
+        }
+
+        fetch('/denegaramparo', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': token
+            },
+            body: JSON.stringify({ params })
+        }).then(response => {
+            if (response.status === 200) {
+                window.location.href = '/amparos/directo'
+            }
+        })
+    }
+    
 </script>
 @endsection('scripts')
 <style>

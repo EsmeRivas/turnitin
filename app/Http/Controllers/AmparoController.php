@@ -29,7 +29,8 @@ class AmparoController extends Controller
     public function directo()
     {
         $GET_AMPAROS = 
-        "select toc.numero_toca,
+        "select amp.id,
+            toc.numero_toca,
             toc.numero_expediente,
             amp.numero_amparo,
             amp.numero_oficio,
@@ -44,6 +45,7 @@ class AmparoController extends Controller
                 limit 1
             ) as quejoso,
             toc.status,
+            amp.tiene_resolucion,
             amp.created_at,
             amp.fecha_inicio_amparo,
             amp.fecha_termino,
@@ -64,7 +66,8 @@ class AmparoController extends Controller
     public function indirecto()
     {
         $GET_AMPAROS = 
-        "select toc.numero_toca,
+        "select amp.id,
+            toc.numero_toca,
             toc.numero_expediente,
             amp.numero_amparo,
             amp.numero_oficio,
@@ -79,6 +82,7 @@ class AmparoController extends Controller
                 limit 1
             ) as quejoso,
             toc.status,
+            amp.tiene_resolucion,
             amp.created_at,
             amp.fecha_inicio_amparo,
             amp.fecha_termino,
@@ -108,7 +112,15 @@ class AmparoController extends Controller
             $colegiado = $requestData['colegiado'];
             $fechaEstimadaTermino = $requestData['termino']; // fecha estimada de termino
             $fechaResolucionFinal = $requestData['fechaResolucion']; // fecha de resolucion final
-            $tieneResolucion = $requestData['resolucion'] === '1' ? true : false;
+            switch ($requestData['resolucion'])
+            {
+                case '1': $tieneResolucion = true;
+                    break;
+                case '2': $tieneResolucion = false;
+                    break;
+                default: $tieneResolucion = null;
+                    break;
+            }
             $tocaID = $requestData['tocaID'];
             $quejosoNombre = $requestData['quejosoNombre'];
             $quejosoApellido1 = $requestData['quejosoApellido1'];
@@ -150,6 +162,62 @@ class AmparoController extends Controller
                 'result' => true,
                 'message' => 'Amparo registrado',
                 'data' => $amparo->id
+            ])->header('Content-Type', 'application/json')
+            ->setStatusCode(200);
+        } catch (\Throwable $error) {
+            return response()->json([
+                'result' => false,
+                'message' => 'Ha ocurrido un problema al registrar el amparo',
+                'data' => null
+            ])->header('Content-Type', 'application/json')
+            ->setStatusCode(500);
+        }
+    }
+
+    public function concederAmparo(Request $request)
+    {
+        try
+        {
+            $params = $request->params;
+            $idAmparo = $params['id'];
+            $tieneResolucion = $params['tieneResolucion'] == 1 ? true : false;
+
+            $query = "update amparos set tiene_resolucion = ?, fecha_resolucion_final = current_timestamp where id = ?";
+
+            $resultUpdate = collect(DB::update($query, [$tieneResolucion, $idAmparo]));
+
+            return response()->json([
+                'result' => true,
+                'message' => 'Se ha concedido el amparo',
+                'data' => null
+            ])->header('Content-Type', 'application/json')
+            ->setStatusCode(200);
+        } catch (\Throwable $error) {
+            return response()->json([
+                'result' => false,
+                'message' => 'Ha ocurrido un problema al registrar el amparo',
+                'data' => null
+            ])->header('Content-Type', 'application/json')
+            ->setStatusCode(500);
+        }
+    }
+
+    public function denegarAmparo(Request $request)
+    {
+        try
+        {
+            $params = $request->params;
+            $idAmparo = $params['id'];
+            $tieneResolucion = $params['tieneResolucion'] == 1 ? true : false;
+
+            $query = "update amparos set tiene_resolucion = ?, fecha_resolucion_final = current_timestamp where id = ?";
+
+            $resultUpdate = collect(DB::update($query, [$tieneResolucion, $idAmparo]));
+
+            return response()->json([
+                'result' => true,
+                'message' => 'Se ha denegado el amparo',
+                'data' => null
             ])->header('Content-Type', 'application/json')
             ->setStatusCode(200);
         } catch (\Throwable $error) {
