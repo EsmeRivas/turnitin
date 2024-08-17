@@ -43,6 +43,7 @@ class TocaController extends Controller
         	string_agg(ctgDeli.nombre_delito, ', ') delito,
         	dist.nombre_distrito,
         	case when ctgvia.es_auto = true then 'AUTO' else 'SENTENCIA' end as via,
+            toc.tipo_via,
         	ctgapelos.nombre_tipo_apelo as tipoApelo,
         	ctgpon.nombre_ponencia as ponencia,
         	concat(pers.nombre, ' ', pers.apellido1, ' ', pers.apellido2) as ponente,
@@ -118,6 +119,7 @@ class TocaController extends Controller
             'mesa_id' => $mesaID,
             'user_id' => $idUserCookie,
             'status' => $estatus,
+            'tipo_via' => $tipo
         ]);
 
         #SE CREA EL DELITO

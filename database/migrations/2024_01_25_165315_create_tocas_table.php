@@ -24,6 +24,7 @@ return new class extends Migration {
             #$table->foreignId('mesa_id')->constrained('mesas');
             #$table->foreignId('user_id')->constrained('users');
             $table->string('status', 50);
+            $table->string('tipo_via', 50);
             $table->timestamps();
         });
     }

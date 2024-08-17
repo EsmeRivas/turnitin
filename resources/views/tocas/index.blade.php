@@ -79,7 +79,7 @@
                             <td>{{$toca->delito}}</td>
                             <td>{{$toca->nombre_distrito}}</td>
                             <td>{{$toca->via}}</td>
-                            <td>{{$toca->numero_toca}}</td>
+                            <td>{{$toca->tipo_via}}</td>
                             <td>{{$toca->tipoapelo}}</td>
                             <td>{{$toca->ponencia}}</td>
                             <td>{{$toca->ponente}}</td>

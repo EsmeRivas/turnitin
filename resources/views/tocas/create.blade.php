@@ -291,12 +291,12 @@
                 var esAuto = selectedOption.text === 'AUTO';
 
                 if (esAuto) {
-                    tipoVia.add(new Option('De forma prision', 'forma_prision'));
-                    tipoVia.add(new Option('Vinculación a Proceso', 'vinculacion'));
-                    tipoVia.add(new Option('No Vinculación a Proceso', 'no_vinculacion'));
+                    tipoVia.add(new Option('De forma prision', 'De forma prision'));
+                    tipoVia.add(new Option('Vinculación a Proceso', 'Vinculación a Proceso'));
+                    tipoVia.add(new Option('No Vinculación a Proceso', 'No Vinculación a Proceso'));
                 } else {
-                    tipoVia.add(new Option('Condenatoria', 'condenatoria'));
-                    tipoVia.add(new Option('Absolutoria', 'absoluto'));
+                    tipoVia.add(new Option('Condenatoria', 'Condenatoria'));
+                    tipoVia.add(new Option('Absolutoria', 'Absolutoria'));
                 }
             }
         });
