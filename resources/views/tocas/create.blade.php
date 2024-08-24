@@ -227,7 +227,6 @@
                                 </div> 
                                 
                                 <div class="form-group clearfix">
-                                    {{-- <label for="juez">Nombre Juez</label> --}}
                                     <div class="form-group clearfix">
                                         <label for="nombre_juez">Nombre Juez</label>
                                         <input id="nombre_juez" type="text" class="form-control"

@@ -7,18 +7,14 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Distrito extends Model
+class JuzgadoOrigen extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
 
-    public function ctg_areas():hasMany
+    public function distritos():HasMany
     {
-        return $this->hasMany(CtgArea::class);
-    }
-    public function juzgado_origen():BelongsTo
-    {
-        return $this->belongsTo(JuzgadoOrigen::class);
+        return $this->hasMany(Distrito::class);
     }
 }
