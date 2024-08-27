@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class Distrito extends Model
 {
@@ -17,8 +18,8 @@ class Distrito extends Model
     {
         return $this->hasMany(CtgArea::class);
     }
-    public function juzgado_origen():BelongsTo
+    public function juzgado_origens():HasOne
     {
-        return $this->belongsTo(JuzgadoOrigen::class);
+        return $this->hasOne(JuzgadoOrigen::class);
     }
 }

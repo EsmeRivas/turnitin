@@ -13,8 +13,8 @@ class JuzgadoOrigen extends Model
 
     protected $guarded = [];
 
-    public function distritos():HasMany
+    public function distritos():BelongsTo
     {
-        return $this->hasMany(Distrito::class);
+        return $this->belongsTo(Distrito::class);
     }
 }

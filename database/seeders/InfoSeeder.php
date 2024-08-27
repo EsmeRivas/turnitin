@@ -1534,7 +1534,7 @@ class InfoSeeder extends Seeder
         }
 
         foreach ($juzgado_origen as $juzgado) {
-            DB::table('juzgado_origen')->insert([
+            DB::table('juzgado_origens')->insert([
                 'juzgado' => $juzgado['juzgado'],
                 'direccion' => $juzgado['direccion'],
                 'distrito_id' => $juzgado['distrito_id']

@@ -15,6 +15,7 @@ use App\Models\CtgVia;
 use App\Models\CtgJuez;
 use App\Models\PersonalAutorizado;
 use App\Models\Observacion;
+use App\Models\JuzgadoOrigen;
 use DateTime;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -85,7 +86,8 @@ class TocaController extends Controller
         $vias = CtgVia::orderBy('id')->get();
         $juez = CtgJuez::orderBy('id')->get();
         $user = User::orderby('id')->get();
-        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','juez','user'));
+        $juzgado = JuzgadoOrigen::orderBy('id')->get();
+        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','juez','user','juzgado'));
     }
 
     public function store(Request $request)
@@ -218,7 +220,15 @@ class TocaController extends Controller
         $vias = CtgVia::orderBy('id')->get();
         $juez = CtgJuez::orderBy('id')->get();
         $user = User::orderby('id')->get();
-        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','juez','user'));
+        $juzgado = JuzgadoOrigen::orderby('id')->get();
+        return view('tocas.create', compact('delitos','distritos','apelos','vias','ponencias','mesas','areas','juez','user','juzgado'));
+    }
+
+    public function obtenerJuzgados($distritoId)
+    {
+        $juzgados = JuzgadoOrigen::where('distrito_id', $distritoId)->get();
+
+        return response()->json($juzgados);
     }
 
     public function updatestatus(Request $request)

@@ -27,6 +27,7 @@ Route::controller(TocaController::class)->group(function () {
     Route::post('/updatestatus', 'updatestatus')->name('register.updatestatus')->middleware('authsession');
     Route::post('/updateStatusFinalizado', 'updateStatusFinalizado')->name('register.updateStatusFinalizado')->middleware('authsession');
     Route::get('/observaciones/{idToca}', 'show')->name('view.toca.show')->middleware('authsession');
+    Route::get('/obtenerJuzgados/{distritoId}', 'obtenerJuzgados')->name('view.toca.show')->middleware('authsession');
 });
 
 Route::controller(AmparoController::class)->group(function () {

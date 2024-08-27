@@ -189,13 +189,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="distrito">Distrito</label>
+                                    <label for="distrito">Distrito</label> 
                                     <select id="distrito" class="form-control" name="distrito" required>
-                                    <option value="" disabled selected>Seleccione una opción</option>
+                                        <option value="" disabled selected>Seleccione una opción</option>
                                         @foreach($distritos as $distrito)
-                                            <option
-                                                value="{{$distrito->id}}">{{$distrito->nombre_distrito}}</option>
+                                            <option value="{{$distrito->id}}">{{$distrito->id}}-{{$distrito->nombre_distrito}}</option>
                                         @endforeach
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="juzgado">Juzgado de Origen</label>
+                                    <select id="juzgado" class="form-control" name="juzgado" required>
+                                        <option value="" disabled selected>Seleccione una opción</option>
                                     </select>
                                 </div>
 
@@ -298,6 +304,29 @@
                     tipoVia.add(new Option('Absolutoria', 'Absolutoria'));
                 }
             }
+        });
+
+        /*Juzgado de Origen*/
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('distrito').addEventListener('change', function() {
+                var distritoId = this.value;
+                console.log(distritoId);
+
+                fetch('/obtenerJuzgados/' + distritoId)
+                    .then(response => response.json())
+                    .then(data => {
+                        var juzgadoSelect = document.getElementById('juzgado');
+                        juzgadoSelect.innerHTML = '<option value="" disabled selected>Seleccione una opción</option>';
+                        
+                        data.forEach(function(juzgado) {
+                            var option = document.createElement('option');
+                            option.value = juzgado.distrito_id;
+                            option.textContent = juzgado.juzgado;
+                            juzgadoSelect.appendChild(option);
+                        });
+                    })
+                    .catch(error => console.error('Hubo un problema con la solicitud fetch:', error));
+            });
         });
 
         // {{-- Acusados --}}
