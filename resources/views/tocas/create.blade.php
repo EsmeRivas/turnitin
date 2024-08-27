@@ -193,7 +193,7 @@
                                     <select id="distrito" class="form-control" name="distrito" required>
                                         <option value="" disabled selected>Seleccione una opción</option>
                                         @foreach($distritos as $distrito)
-                                            <option value="{{$distrito->id}}">{{$distrito->id}}-{{$distrito->nombre_distrito}}</option>
+                                            <option value="{{$distrito->id}}">{{$distrito->nombre_distrito}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -320,7 +320,7 @@
                         
                         data.forEach(function(juzgado) {
                             var option = document.createElement('option');
-                            option.value = juzgado.distrito_id;
+                            option.value = juzgado.id;
                             option.textContent = juzgado.juzgado;
                             juzgadoSelect.appendChild(option);
                         });
@@ -536,6 +536,7 @@
             const inputPonencias = document.getElementById('ponencias')
             const inputDelito = document.getElementById('delitos')
             const inputDistrito = document.getElementById('distrito')
+            const inputJuzgado = document.getElementById('juzgado')
             const inputVia = document.getElementById('vias')
             const inputTipo = document.getElementById('tipo')
             const inputJuez = document.getElementById('nombre_juez')
@@ -550,6 +551,7 @@
             const ponencia = inputPonencias.value
             const delito = inputDelito.value
             const distrito = inputDistrito.value
+            const juzgado = inputJuzgado.value
             const via = inputVia.value
             const tipo = inputTipo.value
             const nombreJuez = inputJuez.value
@@ -571,6 +573,7 @@
                     ponencia: ponencia,
                     delito: delito,
                     distrito: distrito,
+                    juzgado: juzgado,
                     via: via,
                     tipo: tipo,
                     nombreJuez: nombreJuez,

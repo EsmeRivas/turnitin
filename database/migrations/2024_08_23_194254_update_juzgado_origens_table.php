@@ -14,6 +14,10 @@ return new class extends Migration
         Schema::table('juzgado_origens', function (Blueprint $table) {
             $table->foreignId('distrito_id')->nullable()->constrained('distritos');
         });
+
+        Schema::table('tocas', function (Blueprint $table) {
+            $table->foreignId('juzgado_id')->nullable()->constrained('juzgado_origens');
+        });
     }
 
     /**
@@ -23,6 +27,10 @@ return new class extends Migration
     {
         Schema::table('juzgado_origens', function (Blueprint $table) {
             $table->dropForeign(['distrito_id']);
+        });
+
+        Schema::table('tocas', function (Blueprint $table) {
+            $table->dropForeign(['juzgado_id']);
         });
     }
 };

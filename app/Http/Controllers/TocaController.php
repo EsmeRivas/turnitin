@@ -97,6 +97,7 @@ class TocaController extends Controller
         $areaID = $request->tocaData['tocaInfo']['areaID'];
         $delitoID = $request->tocaData['tocaInfo']['delito'];
         $distrito = $request->tocaData['tocaInfo']['distrito'];
+        $juzgado = $request->tocaData['tocaInfo']['juzgado'];
         $estatus = $request->tocaData['tocaInfo']['estatus'];
         $mesaID = $request->tocaData['tocaInfo']['mesaID'];
         $numeroExpediente = $request->tocaData['tocaInfo']['numeroExpediente'];
@@ -110,7 +111,7 @@ class TocaController extends Controller
         $victimas = $request->tocaData['victimas'];
         $acusados = $request->tocaData['acusados'];
         $personalAutorizado = $request->tocaData['personalAutorizado'];
-        
+
         #se crea la toca
         $toca = Toca::create([
             'numero_toca' => $numeroToca,
@@ -121,7 +122,8 @@ class TocaController extends Controller
             'mesa_id' => $mesaID,
             'user_id' => $idUserCookie,
             'status' => $estatus,
-            'tipo_via' => $tipo
+            'tipo_via' => $tipo,
+            'juzgado_id' => $juzgado
         ]);
 
         #SE CREA EL DELITO

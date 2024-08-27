@@ -48,7 +48,6 @@ class Toca extends Model
         return $this->belongsTo(CtgMesa::class);
     }
 
-
     public function ctg_via(): belongsTo
     {
         return $this->belongsTo(CtgVia::class);
@@ -79,5 +78,8 @@ class Toca extends Model
         return $this->belongsTo(CtgApelo::class);
     }
 
-
+    public function juzgado_origens(): belongsTo
+    {
+        return $this->belongsTo(JuzgadoOrigen::class);
+    }
 }

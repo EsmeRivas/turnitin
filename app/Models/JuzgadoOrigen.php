@@ -17,4 +17,9 @@ class JuzgadoOrigen extends Model
     {
         return $this->belongsTo(Distrito::class);
     }
+
+    public function tocas(): hasMany
+    {
+        return $this->hasMany(Toca::class);
+    }
 }
