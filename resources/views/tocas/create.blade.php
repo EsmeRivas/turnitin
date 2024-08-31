@@ -598,11 +598,20 @@
                         "progressBar": true,
                         "closeButton": true
                     }
-                    toastr.success("Se ha registrado el amparo", '', {timeOut: 7000})
+                    toastr.success("Se ha registrado el toca", '', {timeOut: 7000})
 
                     btnCreateToca.disabled = false
                     spinnerCreateToca.style.display = 'none'
                     window.location.href = '/'
+                } else {
+                    toastr.options = {
+                        "progressBar": true,
+                        "closeButton": true
+                    }
+                    toastr.warning("Ha ocurrido un error", '', {timeOut: 7000})
+
+                    btnCreateToca.disabled = false
+                    spinnerCreateToca.style.display = 'none'
                 }
             })
         })
